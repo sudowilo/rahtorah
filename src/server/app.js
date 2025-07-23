@@ -1,11 +1,18 @@
 import express from "express";
+import authRoutes from "./routes/authRoutes.js";
 
 const app = express();
 
-app.get("/", (req, res) => {
-  res.send("this is my response");
-});
+//middlewares 
+app.use(express.json());
 
-app.listen(3000, () => {
-  console.log("server on http://localhost:3000");
-});
+
+//routes
+app.use('/api/auth', authRoutes);
+
+//home page for tests
+app.get('/', (req, res)=>{
+  res.json('this is home');
+})
+
+export default app;
