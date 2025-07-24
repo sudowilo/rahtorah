@@ -3,16 +3,15 @@ import authRoutes from "./routes/authRoutes.js";
 
 const app = express();
 
-//middlewares 
+//middlewares
 app.use(express.json());
 
-
 //routes
-app.use('/api/auth', authRoutes);
+app.use("/api/auth", authRoutes);
 
 //home page for tests
-app.get('/', (req, res)=>{
-  res.json('this is home');
-})
+app.get("/", (req, res) => {
+  res.json("this is home");
+});
 
 export default app;
