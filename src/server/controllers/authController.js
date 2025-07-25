@@ -82,6 +82,13 @@ export const register = async (req, res) => {
       });
     }
 
+    if (!process.env.JWT_SECRET) {
+      console.error("JWT_SECRET not defined in .env");
+      return res.status(500).json({
+        success: false,
+        message: "خطای سرور",
+      });
+    }
     const token = jwt.sign(
       { id: data.id, username: data.username },
       process.env.JWT_SECRET
@@ -91,7 +98,7 @@ export const register = async (req, res) => {
       success: true,
       message: "کاربر با موفقیت ثبت شد",
       data,
-      token
+      token,
     });
   } catch (error) {
     console.error(error);
@@ -102,6 +109,64 @@ export const register = async (req, res) => {
   }
 };
 
-export const login = (req, res) => {
-  res.json("here is login section");
+export const login = async (req, res) => {
+  const { identifier, password } = req.body;
+
+  if (!(identifier && password)) {
+    return res.status(400).json({
+      success: false,
+      message: "لطفا اطلاعات را وارد کنید",
+    });
+  }
+
+  const { data, error } = await supabase
+    .from("users")
+    .select()
+    .or(
+      `username.eq.${identifier},phone_number.eq.${identifier},email.eq.${identifier}`
+    )
+    .maybeSingle();
+
+  if (error) {
+    console.error(error);
+    return res.status(500).json({
+      success: false,
+      message: "مشکل در پردازش اطلاعات دوباره تلاش کنید",
+    });
+  }
+
+  if (!data) {
+    return res.status(400).json({
+      success: false,
+      message: "حسابی با اطلاعات ورودی وجود ندارد",
+    });
+  }
+
+  const { id, password: hash } = data;
+  const passwordVerify = await bcrypt.compare(password, hash);
+
+  if (!passwordVerify) {
+    return res.status(400).json({
+      success: false,
+      message: "رمز عبور اشتباه است",
+    });
+  }
+
+  if (!process.env.JWT_SECRET) {
+    console.error("JWT_SECRET not defined in .env");
+    return res.status(500).json({
+      success: false,
+      message: "خطای سرور",
+    });
+  }
+  const token = jwt.sign(
+    { id: data.id, username: data.username },
+    process.env.JWT_SECRET
+  );
+
+  return res.status(200).json({
+    success: true,
+    message: "ورود موفق",
+    token,
+  });
 };

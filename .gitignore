@@ -27,3 +27,5 @@ pids/
 # Build/Dist directories (if applicable)
 dist/
 build/
+
+.vscode
