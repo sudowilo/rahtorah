@@ -1,7 +1,8 @@
 import supabase from "../lib/supabaseClient.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
-import {userSchema} from "../validators/user.js"
+import { userSchema } from "../validators/user.js";
+import { success } from "zod";
 
 export const register = async (req, res) => {
   try {
@@ -14,23 +15,6 @@ export const register = async (req, res) => {
       phoneNumber,
       email,
     } = req.body;
-
-    if (
-      !(
-        firstName &&
-        lastName &&
-        gender &&
-        username &&
-        password &&
-        phoneNumber &&
-        email
-      )
-    ) {
-      return res.status(400).json({
-        success: false,
-        message: "please fill all of the requirements",
-      });
-    }
 
     const userInput = {
       firstName,
@@ -68,6 +52,13 @@ export const register = async (req, res) => {
       .select()
       .single();
 
+    if (!data) {
+      return res.status(500).json({
+        success: false,
+        message: "خطای در ثبت نام، لطفا دوباره تلاش کنید",
+      });
+    }
+
     if (error) {
       if (error.code === "23505") {
         const { details } = error;
@@ -87,20 +78,26 @@ export const register = async (req, res) => {
       console.error(error);
       return res.status(500).json({
         success: false,
-        message: "couldn't insert user to database",
+        message: "کاربر ثبت نشد دوباره تلاش کنید",
       });
     }
 
+    const token = jwt.sign(
+      { id: data.id, username: data.username },
+      process.env.JWT_SECRET
+    );
+
     res.status(200).json({
       success: true,
-      message: "ready to go",
+      message: "کاربر با موفقیت ثبت شد",
       data,
+      token
     });
   } catch (error) {
     console.error(error);
     res.status(500).json({
       success: false,
-      message: "خطای داخلی"
+      message: "خطای داخلی",
     });
   }
 };
