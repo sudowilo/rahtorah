@@ -2,7 +2,6 @@ import supabase from "../lib/supabaseClient.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import { userSchema } from "../validators/user.js";
-import { success } from "zod";
 
 export const register = async (req, res) => {
   try {
@@ -50,14 +49,7 @@ export const register = async (req, res) => {
         email,
       })
       .select()
-      .single();
-
-    if (!data) {
-      return res.status(500).json({
-        success: false,
-        message: "خطای در ثبت نام، لطفا دوباره تلاش کنید",
-      });
-    }
+      .maybeSingle();
 
     if (error) {
       if (error.code === "23505") {
