@@ -20,8 +20,9 @@ const { cities, provinces } = await getData();
 export const validateCity = (fullName) => {
   const [province, city] = fullName.split("/");
 
-  const validCity = cities.some((item) => item.name === city);
-  const validProvince = provinces.some((item) => item.name === province);
+  const validCity = cities.find((item) => item.name === city);
+  const validProvince = provinces.find((item) => item.name === province);
 
-  return validCity && validProvince;
+  if ((validCity && validProvince) === undefined) return false;
+  return validCity.province_id === validProvince.id;
 };
