@@ -2,6 +2,7 @@ import { success } from "zod";
 import supabase from "../lib/supabaseClient.js";
 import { validateCity } from "../validators/city.js";
 import { tripSchema } from "../validators/trip.js";
+import { timeLessThan } from "../utils/time.js";
 import dayjs from "dayjs";
 import jalali from "jalali-plugin-dayjs";
 dayjs.extend(jalali);
@@ -48,19 +49,27 @@ export const createTrip = async (req, res) => {
 
   const dateIsToday = dayjs(departureDate, { jalali: true }).isSame(now, "day");
   if (dateIsToday) {
-    const from = dayjs(`${departureDate} ${departureTimeFrom}`, "HH:mm");
-    const to = dayjs(`${departureDate} ${departureTimeTo}`, "HH:mm");
+    const from = dayjs(
+      `${departureDate} ${departureTimeFrom}`,
+      "YYYY-MM-DD HH:mm"
+    );
+    const to = dayjs(`${departureDate} ${departureTimeTo}`, "YYYY-MM-DD HH:mm");
     const nowTime = dayjs()
       .set("second", 0)
       .set("millisecond", 0)
       .calendar("jalali");
-    console.log("from:", from);
-    console.log("to:", to);
-    console.log("nowTime:", nowTime);
-    if (from.isBefore(nowTime) || to.isBefore(nowTime)) {
+
+    if (timeLessThan(from, nowTime) || timeLessThan(to, nowTime)) {
       return res.status(400).json({
         success: false,
         message: "زمان حرکت باید بعد از زمان فعلی باشد",
+      });
+    }
+
+    if (timeLessThan(to, from)) {
+      return res.status(400).json({
+        success: false,
+        message: "زمان پایان نباید قبل از زمان شروع باشد",
       });
     }
   }
@@ -114,9 +123,29 @@ export const createTrip = async (req, res) => {
     });
   }
 
+  const { data: participant, error: participantError } = await supabase
+    .from("trip_participants")
+    .insert({
+      trip_id: data.id,
+      user_id: user.id,
+      role: "host",
+      status: "accepted",
+    })
+    .select()
+    .maybeSingle();
+
+  if (participantError) {
+    console.log(participantError);
+    return res.status(500).json({
+      success: false,
+      message: "خطا در ثبت کاربر به عنوان صاحب آگهی",
+    });
+  }
+
   return res.json({
     success: true,
     message: "آگهی سفر با موفقیت ثبت شد",
     data,
+    participant,
   });
 };
