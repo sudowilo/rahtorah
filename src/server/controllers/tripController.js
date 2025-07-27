@@ -232,3 +232,10 @@ export const listTrips = async (req, res) => {
     data,
   });
 };
+
+export const createJoinRequest = async (req, res) => {
+  return res.status(200).json({
+    success: true,
+    message: "درخواست عضویت در سفر با موفقیت ارسال شد",
+  });
+};
