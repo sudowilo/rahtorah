@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { optional, z } from "zod";
 import dayjs from "dayjs";
 import jalali from "jalali-plugin-dayjs";
 
@@ -52,5 +52,19 @@ export const tripSchema = z.object({
   note: z
     .string()
     .max(400, "یادداشت نباید بیشتر از ۴۰۰ کاراکتر باشد")
+    .optional(),
+});
+
+export const tripListSchema = z.object({
+  origin: z
+    .string()
+    .max(30, "مبدا نباید بیشتر از ۳۰ کاراکتر باشد")
+    .regex(persianLocationRegex, "فرمت مبدا باید استان/شهر و به فارسی باشد")
+    .optional(),
+
+  destination: z
+    .string()
+    .max(30, "مقصد نباید بیشتر از ۳۰ کاراکتر باشد")
+    .regex(persianLocationRegex, "فرمت مقصد باید استان/شهر و به فارسی باشد")
     .optional(),
 });
