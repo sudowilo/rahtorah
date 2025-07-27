@@ -9,7 +9,7 @@ import {
 const router = Router();
 
 router.post("/create-trip", authMiddleware, createTrip);
-router.get("/list-trips", authMiddleware, listTrips);
+router.get("/list-trips", listTrips);
 router.post("/create-join-request", authMiddleware, createJoinRequest);
 
 export default router;

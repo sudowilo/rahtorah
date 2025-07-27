@@ -234,6 +234,35 @@ export const listTrips = async (req, res) => {
 };
 
 export const createJoinRequest = async (req, res) => {
+  const user = req.user;
+
+  const { tripId, role, status } = req.body;
+
+  const { data, error } = await supabase
+    .from("trip_participants")
+    .insert({
+      trip_id: tripId,
+      user_id: user.id,
+      role,
+      status,
+    })
+    .select()
+    .maybeSingle();
+
+  if (error) {
+    if (error.code === '23505') {
+      return res.status(400).json({
+        success: false,
+        message: "درخواست شما از قبل ارسال شده",
+      })
+    }
+    console.error(error);
+    return res.status(500).json({
+      success: false,
+      message: "خطا در ارسال درخواست",
+    });
+  }
+
   return res.status(200).json({
     success: true,
     message: "درخواست عضویت در سفر با موفقیت ارسال شد",
