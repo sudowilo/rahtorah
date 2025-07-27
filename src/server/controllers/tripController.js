@@ -1,7 +1,7 @@
 import { success } from "zod";
 import supabase from "../lib/supabaseClient.js";
 import { validateCity } from "../validators/city.js";
-import { tripSchema } from "../validators/trip.js";
+import { tripSchema, tripListSchema } from "../validators/trip.js";
 import { timeLessThan } from "../utils/time.js";
 import dayjs from "dayjs";
 import jalali from "jalali-plugin-dayjs";
@@ -29,9 +29,8 @@ export const createTrip = async (req, res) => {
     seatsTotal,
     allowedGender,
     note,
-    user,
   } = req.body;
-
+  const user = req.user;
   const result = tripSchema.safeParse(req.body);
 
   if (!result.success) {
@@ -111,15 +110,16 @@ export const createTrip = async (req, res) => {
   if (openTrips.error) {
     return res.status(500).json({
       success: false,
-      message: "خطا هنگام دریافت اطلاعات سفر"
-    })
+      message: "خطا هنگام دریافت اطلاعات سفر",
+    });
   }
 
   if (openTrips.data.length >= 3) {
     return res.status(405).json({
       success: false,
-      message: "شما نمی‌توانید همزمان در بیش از ۳ آگهی سفر فعال حضور داشته باشید"
-    })
+      message:
+        "شما نمی‌توانید همزمان در بیش از ۳ آگهی سفر فعال حضور داشته باشید",
+    });
   }
 
   const { data, error } = await supabase
@@ -173,5 +173,62 @@ export const createTrip = async (req, res) => {
     message: "آگهی سفر با موفقیت ثبت شد",
     data,
     participant,
+  });
+};
+
+export const listTrips = async (req, res) => {
+  const result = tripListSchema.safeParse(req.query);
+  if (!result.success) {
+    return res.status(400).json({
+      success: false,
+      message: "مشکل در اطلاعات ورودی",
+      errors: result.error.format(),
+    });
+  }
+
+  const { origin, destination } = result.data;
+
+  //validate if provided city is valid or not
+  const validOrigin = origin ? validateCity(origin) : true;
+  const validDestination = destination ? validateCity(destination) : true;
+
+  if (!validOrigin) {
+    return res.status(400).json({
+      success: false,
+      message: "مبدا ارسال شده صحیح نمی‌باشد",
+    });
+  }
+  if (!validDestination) {
+    return res.status(400).json({
+      success: false,
+      message: "مقصد ارسال شده صحیح نمی‌باشد",
+    });
+  }
+
+  // building query
+  let query = supabase
+    .from("trips")
+    .select("*")
+    .eq("status", "open")
+    .order("departure_date", { ascending: true })
+    .order("departure_time_from", { ascending: true });
+
+  if (origin) query = query.eq("origin_text", origin);
+  if (destination) query = query.eq("destination_text", destination);
+
+  //fetching data
+  const { data, error } = await query;
+
+  if (error) {
+    return res.status(500).json({
+      success: false,
+      message: "مشکلی در دریافت سفرها پیش آمد",
+    });
+  }
+
+  return res.status(200).json({
+    success: true,
+    message: "here is you list sir",
+    data,
   });
 };
