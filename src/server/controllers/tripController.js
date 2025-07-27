@@ -8,6 +8,16 @@ import jalali from "jalali-plugin-dayjs";
 dayjs.extend(jalali);
 const now = dayjs();
 
+const getOpenTrips = async (userId) => {
+  const { data, error } = await supabase
+    .from("trip_participants")
+    .select("*, trip_id!inner(*)")
+    .eq("trip_id.status", "open")
+    .eq("user_id", userId);
+
+  return { data, error };
+};
+
 export const createTrip = async (req, res) => {
   const {
     origin,
@@ -94,6 +104,22 @@ export const createTrip = async (req, res) => {
       message:
         'شما نمی‌توانید جنسیت مخالف خود را برای سفر انتخاب کنید از گزینه "مهم نیست" استفاده کنید',
     });
+  }
+
+  const openTrips = await getOpenTrips(user.id);
+
+  if (openTrips.error) {
+    return res.status(500).json({
+      success: false,
+      message: "خطا هنگام دریافت اطلاعات سفر"
+    })
+  }
+
+  if (openTrips.data.length >= 3) {
+    return res.status(405).json({
+      success: false,
+      message: "شما نمی‌توانید همزمان در بیش از ۳ آگهی سفر فعال حضور داشته باشید"
+    })
   }
 
   const { data, error } = await supabase
