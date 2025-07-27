@@ -29,9 +29,8 @@ export const createTrip = async (req, res) => {
     seatsTotal,
     allowedGender,
     note,
-    user,
   } = req.body;
-
+  const user = req.user;
   const result = tripSchema.safeParse(req.body);
 
   if (!result.success) {
@@ -111,15 +110,16 @@ export const createTrip = async (req, res) => {
   if (openTrips.error) {
     return res.status(500).json({
       success: false,
-      message: "خطا هنگام دریافت اطلاعات سفر"
-    })
+      message: "خطا هنگام دریافت اطلاعات سفر",
+    });
   }
 
   if (openTrips.data.length >= 3) {
     return res.status(405).json({
       success: false,
-      message: "شما نمی‌توانید همزمان در بیش از ۳ آگهی سفر فعال حضور داشته باشید"
-    })
+      message:
+        "شما نمی‌توانید همزمان در بیش از ۳ آگهی سفر فعال حضور داشته باشید",
+    });
   }
 
   const { data, error } = await supabase
@@ -173,5 +173,12 @@ export const createTrip = async (req, res) => {
     message: "آگهی سفر با موفقیت ثبت شد",
     data,
     participant,
+  });
+};
+
+export const listTrips = async (req, res) => {
+  return res.status(200).json({
+    success: true,
+    message: "here is you list sir",
   });
 };
