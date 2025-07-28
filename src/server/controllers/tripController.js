@@ -7,7 +7,7 @@ import jalali from "jalali-plugin-dayjs";
 dayjs.extend(jalali);
 const now = dayjs();
 
-const openCreatedTrips = async (userId) => {
+const openHostedTrips = async (userId) => {
   const { data, error } = await supabase
     .from("trip_participants")
     .select("*, trip_id!inner(*)")
@@ -104,7 +104,7 @@ export const createTrip = async (req, res) => {
     });
   }
 
-  const openTrips = await openCreatedTrips(user.id);
+  const openTrips = await openHostedTrips(user.id);
 
   if (openTrips.error) {
     return res.status(500).json({
