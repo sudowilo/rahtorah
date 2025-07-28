@@ -4,6 +4,7 @@ import { tripSchema, tripListSchema } from "../validators/trip.js";
 import { timeLessThan } from "../utils/time.js";
 import dayjs from "dayjs";
 import jalali from "jalali-plugin-dayjs";
+import { success } from "zod";
 dayjs.extend(jalali);
 const now = dayjs();
 
@@ -249,11 +250,11 @@ export const createJoinRequest = async (req, res) => {
     .maybeSingle();
 
   if (error) {
-    if (error.code === '23505') {
+    if (error.code === "23505") {
       return res.status(400).json({
         success: false,
         message: "درخواست شما از قبل ارسال شده",
-      })
+      });
     }
     console.error(error);
     return res.status(500).json({
@@ -265,5 +266,159 @@ export const createJoinRequest = async (req, res) => {
   return res.status(200).json({
     success: true,
     message: "درخواست عضویت در سفر با موفقیت ارسال شد",
+  });
+};
+
+export const acceptRequest = async (req, res) => {
+  const { tripParticipantsId } = req.body;
+  const user = req.user;
+
+  const { data, error } = await supabase
+    .from("trip_participants")
+    .select(
+      `
+      id,
+      trip_id!inner(id, creator_id, seats_total),
+      status
+      `
+    )
+    .eq("id", tripParticipantsId)
+    .single();
+
+  if (error) {
+    return res.status(500).json({
+      success: false,
+      message: "خطای داخلی بعدا امتحان کنید",
+      error,
+    });
+  }
+
+  if (user.id !== data["trip_id"].creator_id) {
+    return res.status(401).json({
+      success: false,
+      message: "شما سازنده این آگهی نیستید",
+    });
+  }
+
+  if (data.status === "accepted") {
+    return res.status(400).json({
+      success: false,
+      message: "سفر از قبل تایید شده است",
+    });
+  }
+
+  const { error: errorParticipants } = await supabase
+    .from("trip_participants")
+    .update({
+      status: "accepted",
+    })
+    .eq("id", tripParticipantsId)
+    .maybeSingle();
+
+  if (errorParticipants) {
+    return res.status(500).json({
+      success: false,
+      message: "خطا در تایید آگهی",
+      errorParticipants,
+    });
+  }
+
+  const newTotalSeats = data.trip_id.seats_total - 1;
+
+  const { error: tripsError } = await supabase
+    .from("trips")
+    .update({ seats_total: newTotalSeats })
+    .eq("id", data.trip_id.id)
+    .maybeSingle();
+
+  if (tripsError) {
+    return res.status(500).json({
+      success: false,
+      message: "خطا در کسر تعداد آگهی",
+      tripsError,
+    });
+  }
+
+  return res.status(200).json({
+    success: true,
+    message: "درخواست با موفقیت تایید شد",
+  });
+};
+
+export const rejectRequest = async (req, res) => {
+  const { tripParticipantsId } = req.body;
+  const user = req.user;
+
+  const { data, error } = await supabase
+    .from("trip_participants")
+    .select(
+      `
+      id,
+      trip_id!inner(id, creator_id, seats_total),
+      status
+      `
+    )
+    .eq("id", tripParticipantsId)
+    .single();
+
+  if (error) {
+    return res.status(500).json({
+      success: false,
+      message: "خطای داخلی بعدا امتحان کنید",
+      error,
+    });
+  }
+
+  if (user.id !== data["trip_id"].creator_id) {
+    return res.status(401).json({
+      success: false,
+      message: "شما سازنده این آگهی نیستید",
+    });
+  }
+
+  if (data.status === "rejected") {
+    return res.status(400).json({
+      success: false,
+      message: "سفر از قبل رد شده است",
+    });
+  }
+
+  if (data.status === "accepted") {
+    const newTotalSeats = data.trip_id.seats_total + 1;
+
+    const { error: tripsError } = await supabase
+      .from("trips")
+      .update({ seats_total: newTotalSeats })
+      .eq("id", data.trip_id.id)
+      .maybeSingle();
+
+    if (tripsError) {
+      return res.status(500).json({
+        success: false,
+        message: "خطا در کسر تعداد آگهی",
+        tripsError,
+      });
+    }
+  }
+
+  const { error: errorParticipants } = await supabase
+    .from("trip_participants")
+    .update({
+      status: "rejected",
+    })
+    .eq("id", tripParticipantsId)
+    .maybeSingle();
+
+  if (errorParticipants) {
+    return res.status(500).json({
+      success: false,
+      message: "خطا در رد آگهی",
+      errorParticipants,
+    });
+  }
+
+  return res.status(200).json({
+    success: true,
+    message: "درخواست با موفقیت رد شد",
   });
 };
