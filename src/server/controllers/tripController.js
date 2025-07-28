@@ -1,12 +1,21 @@
 import supabase from "../lib/supabaseClient.js";
 import { validateCity } from "../validators/city.js";
 import { tripSchema, tripListSchema } from "../validators/trip.js";
-import { fetchOpenTrips } from "./profileController.js";
 import { timeLessThan } from "../utils/time.js";
 import dayjs from "dayjs";
 import jalali from "jalali-plugin-dayjs";
 dayjs.extend(jalali);
 const now = dayjs();
+
+const openCreatedTrips = async (userId) => {
+  const { data, error } = await supabase
+    .from("trip_participants")
+    .select("*, trip_id!inner(*)")
+    .eq("trip_id.status", "open")
+    .eq("user_id", userId);
+
+  return { data, error };
+};
 
 export const createTrip = async (req, res) => {
   const {
@@ -95,7 +104,7 @@ export const createTrip = async (req, res) => {
     });
   }
 
-  const openTrips = await fetchOpenTrips(user.id);
+  const openTrips = await openCreatedTrips(user.id);
 
   if (openTrips.error) {
     return res.status(500).json({
