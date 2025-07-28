@@ -1,4 +1,3 @@
-import { success } from "zod";
 import supabase from "../lib/supabaseClient.js";
 import { validateCity } from "../validators/city.js";
 import { tripSchema, tripListSchema } from "../validators/trip.js";
@@ -8,7 +7,7 @@ import jalali from "jalali-plugin-dayjs";
 dayjs.extend(jalali);
 const now = dayjs();
 
-const getOpenTrips = async (userId) => {
+const openCreatedTrips = async (userId) => {
   const { data, error } = await supabase
     .from("trip_participants")
     .select("*, trip_id!inner(*)")
@@ -105,7 +104,7 @@ export const createTrip = async (req, res) => {
     });
   }
 
-  const openTrips = await getOpenTrips(user.id);
+  const openTrips = await openCreatedTrips(user.id);
 
   if (openTrips.error) {
     return res.status(500).json({
