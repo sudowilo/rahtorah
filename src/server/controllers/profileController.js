@@ -1,6 +1,16 @@
 import { success } from "zod";
 import supabase from "../lib/supabaseClient.js";
 
+export const fetchOpenTrips = async (userId) => {
+  const { data, error } = await supabase
+    .from("trip_participants")
+    .select("*, trip_id!inner(*)")
+    .eq("trip_id.status", "open")
+    .eq("user_id", userId);
+
+  return { data, error };
+};
+
 export const profileInfo = async (req, res) => {
   const user = req.user;
 
@@ -53,4 +63,11 @@ export const requests = async (req, res) => {
     message: "لیست درخواست های دریافتی",
     data,
   });
+};
+
+export const openTrips = (req, res) => {
+  return res.status(200).json({
+    success: true,
+    message: "لیست سفرهای فعال",
+  })
 };
