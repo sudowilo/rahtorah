@@ -278,7 +278,7 @@ export const acceptRequest = async (req, res) => {
     .select(
       `
       id,
-      trip_id!inner(id, creator_id, seats_total),
+      trip_id!inner(id, creator_id, seats_total, status),
       status
       `
     )
@@ -307,6 +307,20 @@ export const acceptRequest = async (req, res) => {
     });
   }
 
+  if (data.status === "rejected") {
+    return res.status(400).json({
+      success: false,
+      message: "سفر از قبل رد شده است",
+    });
+  }
+
+  if (data.trip_id.status !== "open") {
+    return res.status(400).json({
+      success: false,
+      message: "این سفر امکان عضوگیری ندارد",
+    });
+  }
+
   const { error: errorParticipants } = await supabase
     .from("trip_participants")
     .update({
@@ -324,10 +338,14 @@ export const acceptRequest = async (req, res) => {
   }
 
   const newTotalSeats = data.trip_id.seats_total - 1;
+  const tripUpdates = { seats_total: newTotalSeats };
+  if (newTotalSeats <= 0) {
+    tripUpdates.status = "closed";
+  }
 
   const { error: tripsError } = await supabase
     .from("trips")
-    .update({ seats_total: newTotalSeats })
+    .update()
     .eq("id", data.trip_id.id)
     .maybeSingle();
 
@@ -369,10 +387,17 @@ export const rejectRequest = async (req, res) => {
     });
   }
 
-  if (user.id !== data["trip_id"].creator_id) {
+  if (user.id !== data.trip_id.creator_id) {
     return res.status(401).json({
       success: false,
       message: "شما سازنده این آگهی نیستید",
+    });
+  }
+
+  if (data.status === "accepted") {
+    return res.status(400).json({
+      success: false,
+      message: "سفر از قبل تایید شده است",
     });
   }
 
