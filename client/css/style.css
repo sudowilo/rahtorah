@@ -3,6 +3,10 @@ body {
   height: 100%;
 }
 
+html {
+  font-size: 16px;
+}
+
 body {
   background: linear-gradient(#0068B2, #FFE8EA);
   background-repeat: no-repeat;
@@ -13,8 +17,20 @@ body {
 .user-name {
   font-family: "Shabnam", sans-serif;
   font-weight: bold;
+  font-size: 1rem;
 }
 
 .user-cart {
   display: flex;
+  background-color: #ffffff;
+  margin: 1.1em;
+  justify-content: space-between;
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+.user-info {
+  display: flex;
+  justify-content: space-between;
+  width: 50%;
 }
