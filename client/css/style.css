@@ -138,5 +138,84 @@ main {
 
 .divider {
   border-top: 1.4px solid #000000;
-  width: 16.5em;
+  width: 16.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.trips {
+  display: flex;
+  flex-direction: column;
+  width: 18rem;
+  align-items: center;
+}
+
+.trips .trip {
+  font-size: 0.8rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 20rem;
+  border: 1.3px solid #000000;
+  border-radius: 10px;
+  margin-top: 0.5rem;
+}
+
+.trips .trip .direction {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 14rem;
+}
+
+.trips .trip .direction .line {
+  /* border-top: 4px dotted rgba(0, 0, 0, 0.3); */
+  width: 9rem;
+  white-space: nowrap;
+  position: relative;
+  overflow: hidden;
+}
+.trips .trip .direction .line::after {
+  content: "................";
+  font-size: 1.2rem;
+  letter-spacing: 7px;
+  color: rgba(0, 0, 0, 0.3);
+}
+
+.trips .trip .direction .origin,
+.trips .trip .direction .destination {
+  font-weight: bold;
+}
+
+.trips .trip .info {
+  display: flex;
+  color: #737373;
+  justify-content: space-between;
+  width: 19.5rem;
+  font-size: 0.8rem;
+}
+
+.trips .trip .info .detail {
+  font-size: 0.75rem;
+}
+
+
+.trips .trip .info .right-side,
+.trips .trip .info .left-side {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  margin: 0.3rem;
+}
+
+.trips .trip .info .right-side .seat-role,
+.trips .trip .info .right-side .gender-role,
+.trips .trip .info .left-side .date-role,
+.trips .trip .info .left-side .time-role {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.trips .trip .info .left-side .time-role .time {
+  display: flex;
+  gap: 0.3rem;
 }
