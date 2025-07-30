@@ -5,23 +5,19 @@ body {
 
 html {
   font-size: 16px;
+  font-family: "Shabnam", sans-serif;
 }
 
 body {
-  background: linear-gradient(#0068B2, #FFE8EA);
+  background: linear-gradient(#0068b2, #ffe8ea);
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
 }
 
-.user-name {
-  font-family: "Shabnam", sans-serif;
-  font-weight: bold;
-  font-size: 1rem;
-}
-
 .user-cart {
   display: flex;
+  flex-direction: column;
   background-color: #ffffff;
   margin: 1.1em;
   justify-content: space-between;
@@ -29,8 +25,53 @@ body {
   border-radius: 10px;
 }
 
-.user-info {
+.user-cart .up-side {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.user-cart .up-side .user-info {
   display: flex;
   justify-content: space-between;
   width: 50%;
+}
+
+.user-cart .up-side .user-info .user-name {
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.user-cart .down-side {
+  display: flex;
+  justify-content: space-between;
+  padding: 3em 1em 0 1em;
+}
+
+/* when there is no notification */
+.user-cart .down-side .requests {
+  border: 2.5px solid #7a7a7a;
+  border-radius: 20px;
+  padding: 0.1em 0.3em;
+  background-color: #ffffff;
+  color: #7a7a7a;
+  width: 7em;
+  height: 2.5em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* when there is a notification */
+.user-cart .down-side .open-trips {
+  border: 2.5px solid #F96B6A;
+  border-radius: 20px;
+  padding: 0.1em 0.3em;
+  background-color: #F96B6A;
+  color: #ffffff;
+  width: 7em;
+  height: 2.5em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
