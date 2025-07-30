@@ -13,7 +13,7 @@
   "license": "SEE LICENSE IN ./LICENSE",
   "author": "sudowilo",
   "type": "module",
-  "main": "src/server/server.js",
+  "main": "server/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon main"
