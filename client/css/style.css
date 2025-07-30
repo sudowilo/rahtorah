@@ -1,6 +1,7 @@
 html,
 body {
   height: 100%;
+  overflow: hidden;
 }
 
 html {
@@ -54,7 +55,8 @@ body {
   border-radius: 20px;
   padding: 0.1em 0.3em;
   background-color: #ffffff;
-  color: #7a7a7a;
+  color: #4f4f4f;
+  background-color: #eeeeee;
   width: 7em;
   height: 2.5em;
   display: flex;
@@ -64,14 +66,22 @@ body {
 
 /* when there is a notification */
 .user-cart .down-side .open-trips {
-  border: 2.5px solid #F96B6A;
+  border: 2.5px solid #f96b6a;
   border-radius: 20px;
   padding: 0.1em 0.3em;
-  background-color: #F96B6A;
+  background-color: #f96b6a;
   color: #ffffff;
   width: 7em;
   height: 2.5em;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+main {
+  background-color: #ffffff;
+  height: 100vh;
+  margin: 1.1em;
+  padding: 1rem;
+  border-radius: 40px;
 }
