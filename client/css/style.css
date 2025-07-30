@@ -84,4 +84,59 @@ main {
   margin: 1.1em;
   padding: 1rem;
   border-radius: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.search {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-basis: auto;
+  width: 15.5em;
+}
+
+.search .origin,
+.search .destination {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #000000;
+  opacity: 45%;
+  border: 2px solid rgba(0, 0, 0, 0.3);
+  width: 4.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+}
+
+.search .mid-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1em;
+}
+
+.search .mid-section .car img {
+  width: 2rem;
+}
+
+.search .mid-section .line {
+  width: 5rem;
+  border-top: 5px dotted rgba(0, 0, 0, 0.3);
+}
+
+.search .mid-section .switch-button {
+  margin-top: 0.8rem;
+}
+
+.search .mid-section .switch-button img {
+  width: 2.5em;
+}
+
+.divider {
+  border-top: 1.4px solid #000000;
+  width: 16.5em;
 }
