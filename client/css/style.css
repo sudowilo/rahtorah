@@ -25,7 +25,7 @@ header {
   flex-shrink: 0;
 }
 
-.user-cart {
+.user-card {
   display: flex;
   flex-direction: column;
   background-color: #ffffff;
@@ -36,31 +36,33 @@ header {
   border-radius: 10px;
 }
 
-.user-cart .up-side {
+.user-card .up-side {
   width: 100%;
   display: flex;
   justify-content: space-between;
 }
 
-.user-cart .up-side .user-info {
+.user-card .up-side .user-info {
   display: flex;
   justify-content: space-between;
   width: 50%;
 }
 
-.user-cart .up-side .user-info .user-name {
+.user-card .up-side .user-info .user-name {
   font-weight: bold;
   font-size: 1rem;
 }
 
-.user-cart .down-side {
+.user-card .down-side {
   display: flex;
   justify-content: space-between;
   padding: 3em 1em 0 1em;
 }
 
 /* when there is no notification */
-.user-cart .down-side .requests {
+.user-card .down-side .requests,
+.no-content,
+.login-button {
   border: 2.5px solid #7a7a7a;
   border-radius: 20px;
   padding: 0.1em 0.3em;
@@ -75,7 +77,9 @@ header {
 }
 
 /* when there is a notification */
-.user-cart .down-side .open-trips {
+.user-card .down-side .open-trips,
+.has-content,
+.register-button {
   border: 2.5px solid #f96b6a;
   border-radius: 20px;
   padding: 0.1em 0.3em;
