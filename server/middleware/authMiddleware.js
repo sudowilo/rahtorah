@@ -17,12 +17,12 @@ export const authMiddleware = async (req, res, next) => {
     req.user = decode;
 
     next();
-  } catch(error) {
+  } catch (error) {
     console.error(error);
     return res.status(401).json({
       success: false,
-      message: "دسترسی غیرمجاز، توکن نامعتبر یا منقضی شده است"
-    })
+      message: "دسترسی غیرمجاز، توکن نامعتبر یا منقضی شده است",
+    });
   }
 };
 
@@ -41,4 +41,28 @@ export const checkAlreadyLoggedIn = (req, res, next) => {
     }
   }
   next();
+};
+
+export const uiAuthMiddleware = async (req, res, next) => {
+  const authHeader = req.headers.authorization;
+
+  if (!authHeader || !authHeader.startsWith("Bearer ")) {
+    req.auth = false;
+    return next();
+  }
+
+  const token = authHeader.split(" ")[1];
+
+  try {
+    const decode = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = decode;
+
+    next();
+  } catch (error) {
+    console.error(error);
+    return res.status(401).json({
+      success: false,
+      message: "دسترسی غیرمجاز، توکن نامعتبر یا منقضی شده است",
+    });
+  }
 };
