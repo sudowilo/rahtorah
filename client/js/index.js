@@ -1,5 +1,7 @@
+import { BASE_URL } from "./config.js";
+
 async function getUserCardHtml() {
-  const url = "http://localhost:3000/render/userCard";
+  const url =  `${BASE_URL}/render/userCard`;
   try {
     const response = await fetch(url);
     if (!response.ok) {

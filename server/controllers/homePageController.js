@@ -1,5 +1,4 @@
 import path from "path";
-import { success } from "zod";
 
 const __dirname = import.meta.dirname;
 const clientPath = path.join(__dirname, "../../client");
