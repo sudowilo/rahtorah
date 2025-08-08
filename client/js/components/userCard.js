@@ -5,7 +5,7 @@ async function getUserInfo() {
 
   const response = await fetch(url, {
     headers: {
-      Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjhiNzBjZmM4LTYzNWUtNDM3Zi04NjIzLTI1NjE4ZjlhYmM0OSIsInVzZXJuYW1lIjoidGhlc3Bpcml0eCIsImlhdCI6MTc1MzYyOTk0MX0.mbJ4UbpvoTpB8A6B-cnFuBMhlIFWYT1JTPPX2kjaGlc`,
+      Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjE4MDI5NmRiLTJjOGUtNDExMy05MjBhLWNkNTEwY2E0YTVhMSIsInVzZXJuYW1lIjoic3Vkb3dpbG8iLCJpYXQiOjE3NTQ2NjMzODV9.Iwug3AKCU_Iiw7tlOsEASFOgIAZ76AYXkTtF4vtjKtc`,
     },
   });
 
@@ -15,7 +15,7 @@ async function getUserInfo() {
 
 export async function renderUserCard(element) {
   const { result, response } = await getUserInfo();
-  console.log(result, response);
+
   if (result.success) {
     const user = result.data;
     element.innerHTML = `<div class="up-side">
@@ -36,8 +36,11 @@ export async function renderUserCard(element) {
   } else {
     if (response.status === 401) {
       element.innerHTML = `
-    <h3>hey there little stranger</h3>
+        <div class="authorization-section">
+          <div class="login-button">ورود</div>
+          <div class="register-button">ثبت‌نام</div>
+        </div>
     `;
-    }
+    } 
   }
 }

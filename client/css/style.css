@@ -56,13 +56,21 @@ header {
 .user-card .down-side {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 3em 1em 0 1em;
+}
+
+.user-card .authorization-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 3em 1em 3em 1em;
 }
 
 /* when there is no notification */
 .user-card .down-side .requests,
 .no-content,
-.login-button {
+.authorization-section .login-button {
   border: 2.5px solid #7a7a7a;
   border-radius: 20px;
   padding: 0.1em 0.3em;
@@ -79,7 +87,7 @@ header {
 /* when there is a notification */
 .user-card .down-side .open-trips,
 .has-content,
-.register-button {
+.authorization-section .register-button {
   border: 2.5px solid #f96b6a;
   border-radius: 20px;
   padding: 0.1em 0.3em;
