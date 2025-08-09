@@ -119,21 +119,40 @@ main {
   justify-content: space-between;
   align-items: center;
   flex-basis: auto;
-  width: 15.5em;
+  width: 18em;
 }
 
-.search .origin,
-.search .destination {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #000000;
+.search .origin-section,
+.search .destination-section {
   opacity: 45%;
   border: 2px solid rgba(0, 0, 0, 0.3);
-  width: 4.25rem;
+  width: 6rem;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 5px;
+  height: 2em;
+  cursor: pointer;
+}
+
+.origin-section .default-origin,
+.destination-section .default-destination{
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #000000;
+}
+
+.origin-section .province,
+.destination-section .province {
+  font-size: 0.5em;
+}
+
+.origin-section .city
+.destination-section .city {
+  display: flex;
+  justify-content: end;
+  font-size: 1em;
+  font-weight: bold;
 }
 
 .search .mid-section {
@@ -155,6 +174,7 @@ main {
 
 .search .mid-section .switch-button {
   margin-top: 0.8rem;
+  cursor: pointer;
 }
 
 .search .mid-section .switch-button img {
