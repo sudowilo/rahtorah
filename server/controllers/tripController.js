@@ -4,9 +4,8 @@ import { tripSchema, tripListSchema } from "../validators/trip.js";
 import { timeLessThan } from "../utils/time.js";
 import dayjs from "dayjs";
 import jalali from "jalali-plugin-dayjs";
-import { success } from "zod";
 dayjs.extend(jalali);
-const now = dayjs();
+
 
 const openHostedTrips = async (userId) => {
   const { data, error } = await supabase
@@ -56,7 +55,9 @@ export const createTrip = async (req, res) => {
     });
   }
 
+  const now = dayjs();
   const dateIsToday = dayjs(departureDate, { jalali: true }).isSame(now, "day");
+  // todo this can all be handled clean and easily with timestamp 
   if (dateIsToday) {
     const from = dayjs(
       `${departureDate} ${departureTimeFrom}`,
@@ -228,7 +229,7 @@ export const listTrips = async (req, res) => {
 
   return res.status(200).json({
     success: true,
-    message: "here is you list sir",
+    message: "لیست سفرها با موفقیت ارسال شد",
     data,
   });
 };
@@ -236,15 +237,15 @@ export const listTrips = async (req, res) => {
 export const createJoinRequest = async (req, res) => {
   const user = req.user;
 
-  const { tripId, role, status } = req.body;
+  const { tripId } = req.body;
 
   const { data, error } = await supabase
     .from("trip_participants")
     .insert({
       trip_id: tripId,
       user_id: user.id,
-      role,
-      status,
+      role: "participant",
+      status: "pending",
     })
     .select()
     .maybeSingle();
