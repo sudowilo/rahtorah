@@ -25,6 +25,13 @@ header {
   flex-shrink: 0;
 }
 
+
+.prevent-select {
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+} 
+
 .user-card {
   display: flex;
   flex-direction: column;
@@ -82,6 +89,7 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 
 /* when there is a notification */
@@ -98,6 +106,7 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 
 main {
@@ -207,6 +216,7 @@ main .divider {
   border: 1.3px solid #000000;
   border-radius: 10px;
   margin-top: 0.5rem;
+  cursor: pointer;
 }
 
 .trips .trip .direction {

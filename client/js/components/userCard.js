@@ -29,14 +29,14 @@ export async function renderUserCard(element) {
           </div>
           <nav><img src="public/menu.svg" alt="menu" class="menu" /></nav>
         </div>
-        <div class="down-side">
+        <div class="down-side prevent-select">
           <div class="requests">درخواست‌ها</div>
           <div class="open-trips">سفرهای فعال</div>
         </div>`;
   } else {
     if (response.status === 401) {
       element.innerHTML = `
-        <div class="authorization-section">
+        <div class="authorization-section prevent-select">
           <div class="login-button">ورود</div>
           <div class="register-button">ثبت‌نام</div>
         </div>
