@@ -346,6 +346,7 @@ body .city-selection-window {
   justify-content: center;
   align-items: center;
   color: #ffffff;
+  cursor: pointer;
 }
 
 .city-selection-window .top-section .select-button {
