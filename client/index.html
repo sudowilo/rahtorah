@@ -8,67 +8,78 @@
     <title>rahtorah</title>
   </head>
   <body>
-    <header>
-      <div class="user-card"></div>
-    </header>
-    <main class="prevent-select">
-      <div class="search">
-        <div class="origin-section">
-          <div class="province">آذربایجان شرقی/</div>
-          <div class="city">تبریز</div>
-        </div>
-        <div class="mid-section">
-          <div class="car">
-            <img src="public/car-icon.svg" alt="car car-icon" />
+    <div class="blurred body-wrapper">
+      <header>
+        <div class="user-card"></div>
+      </header>
+      <main class="prevent-select">
+        <div class="search">
+          <div class="origin-section">
+            <div class="province">آذربایجان شرقی/</div>
+            <div class="city">تبریز</div>
           </div>
-          <div class="line"></div>
-          <div class="switch-button">
-            <img src="public/switch-icon.svg" alt="switch car-icon" />
-          </div>
-        </div>
-        <div class="destination-section">
-          <div class="default-destination">مقصد</div>
-        </div>
-      </div>
-      <div class="divider"></div>
-      <div class="trips">
-        <div class="trip">
-          <div class="direction">
-            <div class="origin">خلخال</div>
-            <div class="line"></div>
-            <div class="destination">تبریز</div>
-          </div>
-          <div class="info">
-            <div class="right-side">
-              <div class="attributes">
-                <div class="seat">ظرفیت:</div>
-                <div class="">جنسیت:</div>
-              </div>
-              <div class="values">
-                <div class="number detail">۳ نفر</div>
-                <div class="gender detail">مهم نیست</div>
-              </div>
+          <div class="mid-section">
+            <div class="car">
+              <img src="public/car-icon.svg" alt="car car-icon" />
             </div>
-            <div class="left-side">
-              <div class="attributes">
-                <div>تاریخ:</div>
-                <div class="">ساعت:</div>
+            <div class="line"></div>
+            <div class="switch-button">
+              <img src="public/switch-icon.svg" alt="switch car-icon" />
+            </div>
+          </div>
+          <div class="destination-section">
+            <div class="default-destination">مقصد</div>
+          </div>
+        </div>
+        <div class="divider"></div>
+        <div class="trips">
+          <div class="trip">
+            <div class="direction">
+              <div class="origin">خلخال</div>
+              <div class="line"></div>
+              <div class="destination">تبریز</div>
+            </div>
+            <div class="info">
+              <div class="right-side">
+                <div class="attributes">
+                  <div class="seat">ظرفیت:</div>
+                  <div class="">جنسیت:</div>
+                </div>
+                <div class="values">
+                  <div class="number detail">۳ نفر</div>
+                  <div class="gender detail">مهم نیست</div>
+                </div>
               </div>
-              <div class="values">
-                <div class="date detail">۱۴۰۴/۰۵/۰۶</div>
-                <div class="time detail">
-                  <div class="from">۱۱:۰۰</div>
-                  <div class="">تا</div>
-                  <div class="to">۱۲:۳۰</div>
+              <div class="left-side">
+                <div class="attributes">
+                  <div>تاریخ:</div>
+                  <div class="">ساعت:</div>
+                </div>
+                <div class="values">
+                  <div class="date detail">۱۴۰۴/۰۵/۰۶</div>
+                  <div class="time detail">
+                    <div class="from">۱۱:۰۰</div>
+                    <div class="">تا</div>
+                    <div class="to">۱۲:۳۰</div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+      </main>
+      <div class="create-trip">
+        <img src="public/plus-icon.svg" alt="create trip icon" />
       </div>
-    </main>
-    <div class="create-trip">
-      <img src="public/plus-icon.svg" alt="create trip icon" />
+    </div>
+    <div class="city-selection-window prevent-select">
+      <div class="top-section">
+        <div class="select-button">استان</div>
+        <div class="select-button">شهر</div>
+      </div>
+      <div class="bottom-section">
+        <div class="submit-button">تایید</div>
+      </div>
     </div>
   </body>
   <script type="module" src="js/index.js"></script>

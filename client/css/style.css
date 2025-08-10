@@ -25,12 +25,15 @@ header {
   flex-shrink: 0;
 }
 
-
 .prevent-select {
   -webkit-user-select: none; /* Safari */
   -ms-user-select: none; /* IE 10 and IE 11 */
   user-select: none; /* Standard syntax */
-} 
+}
+
+.blurred {
+  filter: blur(2px); /* Adjust the pixel value for desired blur intensity */
+}
 
 .user-card {
   display: flex;
@@ -140,12 +143,12 @@ main {
   align-items: center;
   justify-content: center;
   border-radius: 5px;
-  height: 2em;
+  height: 3em;
   cursor: pointer;
 }
 
 .origin-section .default-origin,
-.destination-section .default-destination{
+.destination-section .default-destination {
   font-size: 1.5rem;
   font-weight: bold;
   color: #000000;
@@ -156,8 +159,7 @@ main {
   font-size: 0.5em;
 }
 
-.origin-section .city
-.destination-section .city {
+.origin-section .city .destination-section .city {
   display: flex;
   justify-content: end;
   font-size: 1em;
@@ -300,5 +302,55 @@ body .create-trip {
 
 body .create-trip img {
   width: 2rem;
+  color: #ffffff;
+}
+
+body .city-selection-window {
+  width: 70vw;
+  height: 30vh;
+  position: fixed;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #ffffff;
+  border: 2px solid #54afff;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.city-selection-window .top-section {
+  /* background-color:lightpink; */
+  display: flex;
+  justify-content: space-between;
+  margin: 0em 1em;
+}
+
+.city-selection-window .bottom-section {
+  display: flex;
+  justify-content: center;
+}
+
+.city-selection-window .top-section .select-button {
+  border: 2px solid lightblue;
+  border-radius: 5px;
+  width: 6em;
+  height: 3em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #7a7a7a;
+}
+
+.city-selection-window .bottom-section .submit-button {
+  border: 2px solid #f96b6a;
+  background-color: #f96b6a;
+  border-radius: 5px;
+  width: 6em;
+  height: 3em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   color: #ffffff;
 }
