@@ -358,6 +358,8 @@ body .city-selection-window {
   justify-content: center;
   align-items: center;
   color: #7a7a7a;
+  cursor: pointer;
+  position:relative;
 }
 
 .city-selection-window .bottom-section .submit-button {
@@ -370,4 +372,15 @@ body .city-selection-window {
   justify-content: center;
   align-items: center;
   color: #ffffff;
+  cursor: pointer;
+}
+
+
+.city-selection-window .top-section .locations {
+  position:absolute;
+  width: 6rem;
+  height: 30vh;
+  background-color: white;
+  z-index: 999;
+  border: 2px solid lightblue;
 }

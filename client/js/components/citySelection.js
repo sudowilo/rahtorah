@@ -1,4 +1,11 @@
-export const selectCity = () => {
+import iranCities from "../lib/iranCities.js";
+import iranProvinces from "../lib/iranProvinces.js";
+
+const locationsNames = (locations) => {
+  return locations.map((elem) => elem.name);
+};
+
+export const selectCity = async () => {
   const locationButtons = document.querySelectorAll(".js-location-selector");
   const body = document.querySelector("body");
   const innerBody = document.querySelector(".inner-body");
@@ -36,7 +43,16 @@ export const selectCity = () => {
 
       provinceSelector.addEventListener("click", (elem) => {
         console.log("provence");
-        provinceSelector.dataset.value = "chiz";
+
+        provinceSelector.insertAdjacentHTML(
+          "beforebegin",
+          `
+          <div class="locations"></div>
+          `
+        );
+
+        
+
       });
 
       citySelector.addEventListener("click", () => {
