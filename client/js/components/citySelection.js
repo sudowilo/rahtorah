@@ -1,9 +1,5 @@
-import iranCities from "../lib/iranCities.js";
 import iranProvinces from "../lib/iranProvinces.js";
-
-const locationsNames = (locations) => {
-  return locations.map((elem) => elem.name);
-};
+import iranCities from "../lib/iranCities.js";
 
 export const selectCity = async () => {
   const locationButtons = document.querySelectorAll(".js-location-selector");
@@ -42,17 +38,20 @@ export const selectCity = async () => {
       const submit = panel.querySelector(".js-submit-location");
 
       provinceSelector.addEventListener("click", (elem) => {
-        console.log("provence");
-
         provinceSelector.insertAdjacentHTML(
-          "beforebegin",
+          "beforeend",
           `
-          <div class="locations"></div>
+          <div class="locations js-locations"></div>
           `
         );
 
-        
+        const locations = provinceSelector.querySelector('.js-locations');
 
+        const provinces = iranProvinces.map(elem => `<div class="name js-name" data-id="${elem.id}">${elem.name}</div>`);
+        const provinceHTML = provinces.join('');
+
+        locations.insertAdjacentHTML('beforeend', provinceHTML);
+        
       });
 
       citySelector.addEventListener("click", () => {

@@ -336,7 +336,7 @@ body .city-selection-window {
 .city-selection-window .top-section .close-button {
   position: absolute;
   top: -3em;
-  right: -1.5em;
+  right: -1.5rem;
   width: 2rem;
   height: 2rem;
   border: 1px solid #f96b6a;
@@ -352,8 +352,8 @@ body .city-selection-window {
 .city-selection-window .top-section .select-button {
   border: 2px solid lightblue;
   border-radius: 5px;
-  width: 6em;
-  height: 3em;
+  width: 7rem;
+  height: 3rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -366,8 +366,8 @@ body .city-selection-window {
   border: 2px solid #f96b6a;
   background-color: #f96b6a;
   border-radius: 5px;
-  width: 6em;
-  height: 3em;
+  width: 6rem;
+  height: 3rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -376,11 +376,20 @@ body .city-selection-window {
 }
 
 
-.city-selection-window .top-section .locations {
+.city-selection-window .top-section .select-button .locations {
   position:absolute;
-  width: 6rem;
+  top: -2px;
+  width: inherit;
   height: 30vh;
   background-color: white;
-  z-index: 999;
   border: 2px solid lightblue;
+  overflow: scroll;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.city-selection-window .top-section .select-button .locations .name {
+  font-size: 0.8rem;
+  margin: 0.5rem 0;
 }
