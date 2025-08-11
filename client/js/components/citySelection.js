@@ -1,12 +1,12 @@
 export const selectCity = () => {
-  const cityButtons = document.querySelectorAll(".js-city-selector");
+  const locationButtons = document.querySelectorAll(".js-location-selector");
   const body = document.querySelector("body");
   const innerBody = document.querySelector(".inner-body");
 
-  for (const button of cityButtons) {
+  for (const button of locationButtons) {
     button.addEventListener("click", (elem) => {
-      const { cityType } = button.dataset;
-      
+      const { locationType } = button.dataset;
+
       innerBody.classList.add("blurred");
       body.insertAdjacentHTML(
         "beforeend",
@@ -14,20 +14,41 @@ export const selectCity = () => {
       <div class="city-selection-window prevent-select">
         <div class="top-section">
           <div class="close-button js-close-button">✕</div>
-          <div class="select-button">استان</div>
-          <div class="select-button">شهر</div>
+          <div class="select-button js-province-selector">استان</div>
+          <div class="select-button js-city-selector">شهر</div>
         </div>
         <div class="bottom-section">
-          <div class="submit-button">تایید</div>
+          <div class="submit-button js-submit-location">تایید</div>
         </div>
       </div>`
       );
 
-      const closeButton = document.querySelector(".js-close-button");
+      const panel = document.querySelector(".city-selection-window");
+      const closeButton = panel.querySelector(".js-close-button");
       closeButton.addEventListener("click", () => {
         innerBody.classList.remove("blurred");
-        const panel = document.querySelector(".city-selection-window");
         panel.remove();
+      });
+
+      const provinceSelector = panel.querySelector(".js-province-selector");
+      const citySelector = panel.querySelector(".js-city-selector");
+      const submit = panel.querySelector(".js-submit-location");
+
+      provinceSelector.addEventListener("click", (elem) => {
+        console.log("provence");
+        provinceSelector.dataset.value = "chiz";
+      });
+
+      citySelector.addEventListener("click", () => {
+        console.log("city");
+        citySelector.dataset.value = "miz";
+      });
+
+      submit.addEventListener("click", (elem) => {
+        const provence = provinceSelector.dataset.value;
+        const city = citySelector.dataset.value;
+
+        console.log(provence + "/" + city);
       });
     });
   }
