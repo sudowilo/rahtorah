@@ -1,11 +1,13 @@
 export const selectCity = () => {
   const cityButtons = document.querySelectorAll(".js-city-selector");
   const body = document.querySelector("body");
+  const innerBody = document.querySelector(".inner-body");
 
   for (const button of cityButtons) {
     button.addEventListener("click", (elem) => {
       const { cityType } = button.dataset;
-
+      
+      innerBody.classList.add("blurred");
       body.insertAdjacentHTML(
         "beforeend",
         `
@@ -20,9 +22,6 @@ export const selectCity = () => {
         </div>
       </div>`
       );
-
-      const innerBody = document.querySelector(".inner-body");
-      innerBody.classList.add("blurred");
 
       const closeButton = document.querySelector(".js-close-button");
       closeButton.addEventListener("click", () => {
