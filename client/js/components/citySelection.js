@@ -149,7 +149,6 @@ export const selectCity = async () => {
       });
 
       submit.addEventListener("click", (elem) => {
-        console.log(button.dataset.locationType);
 
         if (!provinceSelector.dataset.id && !citySelector.dataset.id) {
           let errorMessage = submit.querySelector(".submit-fail");

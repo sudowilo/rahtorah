@@ -390,6 +390,7 @@ body .city-selection-window {
   flex-direction: column;
   align-items: stretch;
   justify-content: space-around;
+  z-index: 999;
 }
 
 .city-selection-window .top-section .select-button .locations .name {
@@ -414,6 +415,6 @@ body .city-selection-window {
 .city-selection-window .submit-fail {
   position:absolute;
   color: #f96b6a;
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   text-align: center;
 }
