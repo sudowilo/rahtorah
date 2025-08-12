@@ -374,6 +374,7 @@ body .city-selection-window {
   align-items: center;
   color: #ffffff;
   cursor: pointer;
+  position: relative;
 }
 
 
@@ -408,4 +409,11 @@ body .city-selection-window {
   position:absolute;
   color: #f96b6a;
   font-size: 0.8rem;
+}
+
+.city-selection-window .submit-fail {
+  position:absolute;
+  color: #f96b6a;
+  font-size: 0.8rem;
+  text-align: center;
 }

@@ -98,7 +98,7 @@ export const selectCity = async () => {
           const provinceId = provinceSelector.dataset.id;
           if (!provinceId) {
             let errorMessage = citySelector.querySelector(".city-select-fail");
-            if (!errorMessage){
+            if (!errorMessage) {
               citySelector.insertAdjacentHTML(
                 "beforeend",
                 `
@@ -150,6 +150,34 @@ export const selectCity = async () => {
 
       submit.addEventListener("click", (elem) => {
         console.log(button.dataset.locationType);
+
+        if (!provinceSelector.dataset.id && !citySelector.dataset.id) {
+          let errorMessage = submit.querySelector(".submit-fail");
+            if (!errorMessage) {
+              submit.insertAdjacentHTML(
+                "beforeend",
+                `
+              <div class="submit-fail">شهر را انتخاب کنید</div>
+              `
+              );
+
+              errorMessage = submit.querySelector(".submit-fail");
+              errorMessage.style.top = - submit.scrollHeight/2 + "px";
+              setTimeout(() => errorMessage.remove(), "5000");
+            }
+            return;
+        }
+
+        button.innerHTML = `
+          <div class="province"></div>
+          <div class="city"></div>`;
+
+        const province = button.querySelector(".province");
+        const city = button.querySelector(".city");
+
+        province.textContent = provinceSelector.textContent + "/";
+        city.textContent = citySelector.textContent;
+
         innerBody.classList.remove("blurred");
         panel.remove();
       });
