@@ -38,20 +38,33 @@ export const selectCity = async () => {
       const submit = panel.querySelector(".js-submit-location");
 
       provinceSelector.addEventListener("click", (elem) => {
-        provinceSelector.insertAdjacentHTML(
-          "beforeend",
-          `
+        if (!provinceSelector.querySelector(".js-locations")) {
+          provinceSelector.insertAdjacentHTML(
+            "beforeend",
+            `
           <div class="locations js-locations"></div>
           `
-        );
+          );
 
-        const locations = provinceSelector.querySelector('.js-locations');
+          const locations = provinceSelector.querySelector(".js-locations");
 
-        const provinces = iranProvinces.map(elem => `<div class="name js-name" data-id="${elem.id}">${elem.name}</div>`);
-        const provinceHTML = provinces.join('');
+          const provinces = iranProvinces.map(
+            (elem) =>
+              `<div class="name js-province-name" data-id="${elem.id}">${elem.name}</div>`
+          );
+          const provinceHTML = provinces.join("");
 
-        locations.insertAdjacentHTML('beforeend', provinceHTML);
-        
+          locations.insertAdjacentHTML("beforeend", provinceHTML);
+
+          const provinceNames = locations.querySelectorAll(".js-province-name");
+          for (const name of provinceNames) {
+            name.addEventListener("click", (e) => {
+              e.stopPropagation();
+              console.log(name.textContent);
+              locations.remove();
+            });
+          }
+        }
       });
 
       citySelector.addEventListener("click", () => {
@@ -60,10 +73,10 @@ export const selectCity = async () => {
       });
 
       submit.addEventListener("click", (elem) => {
-        const provence = provinceSelector.dataset.value;
+        const province = provinceSelector.dataset.value;
         const city = citySelector.dataset.value;
 
-        console.log(provence + "/" + city);
+        console.log(province + "/" + city);
       });
     });
   }
