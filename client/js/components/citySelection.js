@@ -1,5 +1,6 @@
 import iranProvinces from "../lib/iranProvinces.js";
 import iranCities from "../lib/iranCities.js";
+import { renderTrips } from "./renderTrips.js";
 
 const fitTextInContainer = (container) => {
   const body = document.querySelector("body");
@@ -148,23 +149,22 @@ export const selectCity = async () => {
         }
       });
 
-      submit.addEventListener("click", (elem) => {
-
+      submit.addEventListener("click", async (elem) => {
         if (!provinceSelector.dataset.id && !citySelector.dataset.id) {
           let errorMessage = submit.querySelector(".submit-fail");
-            if (!errorMessage) {
-              submit.insertAdjacentHTML(
-                "beforeend",
-                `
+          if (!errorMessage) {
+            submit.insertAdjacentHTML(
+              "beforeend",
+              `
               <div class="submit-fail">شهر را انتخاب کنید</div>
               `
-              );
+            );
 
-              errorMessage = submit.querySelector(".submit-fail");
-              errorMessage.style.top = - submit.scrollHeight/2 + "px";
-              setTimeout(() => errorMessage.remove(), "5000");
-            }
-            return;
+            errorMessage = submit.querySelector(".submit-fail");
+            errorMessage.style.top = -submit.scrollHeight / 2 + "px";
+            setTimeout(() => errorMessage.remove(), "5000");
+          }
+          return;
         }
 
         button.innerHTML = `
@@ -174,11 +174,24 @@ export const selectCity = async () => {
         const province = button.querySelector(".province");
         const city = button.querySelector(".city");
 
-        province.textContent = provinceSelector.textContent + "/";
-        city.textContent = citySelector.textContent;
+        const provinceText = provinceSelector.textContent + "/";
+        const cityText = citySelector.textContent;
+
+        province.textContent = provinceText;
+        city.textContent = cityText;
+
+        localStorage.setItem(
+          button.dataset.locationType,
+          provinceText + cityText
+        );
+
+        const originText = localStorage.getItem("origin");
+        const destinationText = localStorage.getItem("destination");
 
         innerBody.classList.remove("blurred");
         panel.remove();
+
+        await renderTrips(originText, destinationText);
       });
     });
   }
