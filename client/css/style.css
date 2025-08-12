@@ -402,3 +402,9 @@ body .city-selection-window {
   background-color: #f96b6a;
   color: #ffffff;
 }
+
+.city-selection-window .top-section .select-button .city-select-fail {
+  position:absolute;
+  color: #f96b6a;
+  font-size: 0.8rem;
+}

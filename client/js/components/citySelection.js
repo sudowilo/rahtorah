@@ -60,7 +60,8 @@ export const selectCity = async () => {
           for (const name of provinceNames) {
             name.addEventListener("click", (e) => {
               e.stopPropagation();
-              console.log(name.textContent);
+              provinceSelector.textContent = name.textContent;
+              provinceSelector.dataset.id = name.dataset.id;
               locations.remove();
             });
           }
@@ -68,13 +69,55 @@ export const selectCity = async () => {
       });
 
       citySelector.addEventListener("click", () => {
-        console.log("city");
-        citySelector.dataset.value = "miz";
+        if (!citySelector.querySelector(".js-locations")) {
+          const provinceId = provinceSelector.dataset.id;
+          if (!provinceId) {
+            citySelector.insertAdjacentHTML(
+              "beforeend",
+              `
+              <div class="city-select-fail">استان را انتخاب کنید</div>
+              `
+            );
+
+            const errorMessage =
+              citySelector.querySelector(".city-select-fail");
+            errorMessage.style.top = citySelector.scrollHeight + "px";
+            setTimeout(() => errorMessage.remove(), "5000");
+            return;
+          }
+
+          citySelector.insertAdjacentHTML(
+            "beforeend",
+            `
+          <div class="locations js-locations"></div>
+          `
+          );
+
+          const locations = citySelector.querySelector(".js-locations");
+
+          const cities = iranCities.map(
+            (elem) =>
+              `<div class="name js-city-name" data-id="${elem.id}">${elem.name}</div>`
+          );
+          const cityHTML = cities.join("");
+
+          locations.insertAdjacentHTML("beforeend", cityHTML);
+
+          const cityNames = locations.querySelectorAll(".js-city-name");
+          for (const name of cityNames) {
+            name.addEventListener("click", (e) => {
+              e.stopPropagation();
+              citySelector.textContent = name.textContent;
+              citySelector.dataset.id = name.dataset.id;
+              locations.remove();
+            });
+          }
+        }
       });
 
       submit.addEventListener("click", (elem) => {
-        const province = provinceSelector.dataset.value;
-        const city = citySelector.dataset.value;
+        const province = provinceSelector.textContent;
+        const city = citySelector.textContent;
 
         console.log(province + "/" + city);
       });
