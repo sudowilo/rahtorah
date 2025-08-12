@@ -28,7 +28,10 @@ const getTripsList = async (origin, destination) => {
   return { result, response };
 };
 
-export const renderTrips = async (origin, destination) => {
+export const renderTrips = async () => {
+  const origin = localStorage.getItem("origin");
+  const destination = localStorage.getItem("destination");
+
   const { result, response } = await getTripsList(origin, destination);
 
   if (result.success) {

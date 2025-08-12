@@ -15,7 +15,37 @@ const fitTextInContainer = (container) => {
   }
 };
 
+const renderDefaultLocationButtons = () => {
+  const locationButtons = document.querySelectorAll(".js-location-selector");
+
+  const originText = localStorage.getItem("origin");
+  const destinationText = localStorage.getItem("destination");
+
+  const origin = originText?.split("/");
+  const destination = destinationText?.split("/");
+
+  for (const button of locationButtons) {
+    const locationType = button.dataset.locationType;
+    const locationFullName = localStorage.getItem(locationType)?.split("/");
+    if (locationFullName) {
+      const province = locationFullName[0] + "/";
+      const city = locationFullName[1];
+
+      button.innerHTML = `
+          <div class="province"></div>
+          <div class="city"></div>`;
+
+      const provinceElem = button.querySelector(".province");
+      const cityElem = button.querySelector(".city");
+
+      provinceElem.textContent = province;
+      cityElem.textContent = city;
+    }
+  }
+};
+
 export const selectCity = async () => {
+  renderDefaultLocationButtons();
   const locationButtons = document.querySelectorAll(".js-location-selector");
   const body = document.querySelector("body");
   const innerBody = document.querySelector(".inner-body");
@@ -188,10 +218,10 @@ export const selectCity = async () => {
         const originText = localStorage.getItem("origin");
         const destinationText = localStorage.getItem("destination");
 
+        await renderTrips(originText, destinationText);
+
         innerBody.classList.remove("blurred");
         panel.remove();
-
-        await renderTrips(originText, destinationText);
       });
     });
   }
