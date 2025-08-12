@@ -2,8 +2,8 @@ import iranProvinces from "../lib/iranProvinces.js";
 import iranCities from "../lib/iranCities.js";
 
 const fitTextInContainer = (container) => {
-  const body = document.querySelector('body');
-  
+  const body = document.querySelector("body");
+
   let defaultFontSize = parseFloat(window.getComputedStyle(body).fontSize);
   let fontSize = parseFloat(window.getComputedStyle(container).fontSize);
 
@@ -13,7 +13,6 @@ const fitTextInContainer = (container) => {
     container.style.fontSize = fontSize + "px";
   }
 };
-
 
 export const selectCity = async () => {
   const locationButtons = document.querySelectorAll(".js-location-selector");
@@ -98,17 +97,19 @@ export const selectCity = async () => {
         if (!citySelector.querySelector(".js-locations")) {
           const provinceId = provinceSelector.dataset.id;
           if (!provinceId) {
-            citySelector.insertAdjacentHTML(
-              "beforeend",
-              `
+            let errorMessage = citySelector.querySelector(".city-select-fail");
+            if (!errorMessage){
+              citySelector.insertAdjacentHTML(
+                "beforeend",
+                `
               <div class="city-select-fail">استان را انتخاب کنید</div>
               `
-            );
+              );
 
-            const errorMessage =
-              citySelector.querySelector(".city-select-fail");
-            errorMessage.style.top = citySelector.scrollHeight + "px";
-            setTimeout(() => errorMessage.remove(), "5000");
+              errorMessage = citySelector.querySelector(".city-select-fail");
+              errorMessage.style.top = citySelector.scrollHeight + "px";
+              setTimeout(() => errorMessage.remove(), "5000");
+            }
             return;
           }
 
@@ -140,7 +141,7 @@ export const selectCity = async () => {
               e.stopPropagation();
               citySelector.textContent = name.textContent;
               citySelector.dataset.id = name.dataset.id;
-              
+
               locations.remove();
             });
           }
@@ -148,10 +149,9 @@ export const selectCity = async () => {
       });
 
       submit.addEventListener("click", (elem) => {
-        const province = provinceSelector.textContent;
-        const city = citySelector.textContent;
-
-        console.log(province + "/" + city);
+        console.log(button.dataset.locationType);
+        innerBody.classList.remove("blurred");
+        panel.remove();
       });
     });
   }
