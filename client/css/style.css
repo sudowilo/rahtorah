@@ -6,6 +6,7 @@ body {
   padding: 0;
   display: flex;
   flex-direction: column;
+  -webkit-tap-highlight-color: transparent;
 }
 
 html {
@@ -32,7 +33,7 @@ header {
 }
 
 .blurred {
-  filter: blur(2px); /* Adjust the pixel value for desired blur intensity */
+  filter: blur(2px); 
 }
 
 .user-card {
@@ -321,7 +322,6 @@ body .city-selection-window {
 }
 
 .city-selection-window .top-section {
-  /* background-color:lightpink; */
   display: flex;
   justify-content: space-between;
   margin: 0em 1em;
@@ -360,6 +360,7 @@ body .city-selection-window {
   color: #7a7a7a;
   cursor: pointer;
   position:relative;
+  white-space: nowrap;
 }
 
 .city-selection-window .bottom-section .submit-button {

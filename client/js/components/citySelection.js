@@ -1,6 +1,20 @@
 import iranProvinces from "../lib/iranProvinces.js";
 import iranCities from "../lib/iranCities.js";
 
+const fitTextInContainer = (container) => {
+  const body = document.querySelector('body');
+  
+  let defaultFontSize = parseFloat(window.getComputedStyle(body).fontSize);
+  let fontSize = parseFloat(window.getComputedStyle(container).fontSize);
+
+  container.style.fontSize = defaultFontSize + "px";
+  while (container.scrollWidth > container.clientWidth) {
+    fontSize -= 1;
+    container.style.fontSize = fontSize + "px";
+  }
+};
+
+
 export const selectCity = async () => {
   const locationButtons = document.querySelectorAll(".js-location-selector");
   const body = document.querySelector("body");
@@ -27,6 +41,12 @@ export const selectCity = async () => {
       );
 
       const panel = document.querySelector(".city-selection-window");
+      panel.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const locationsMenu = panel.querySelector(".js-locations");
+        locationsMenu?.remove();
+      });
+
       const closeButton = panel.querySelector(".js-close-button");
       closeButton.addEventListener("click", () => {
         innerBody.classList.remove("blurred");
@@ -37,8 +57,12 @@ export const selectCity = async () => {
       const citySelector = panel.querySelector(".js-city-selector");
       const submit = panel.querySelector(".js-submit-location");
 
-      provinceSelector.addEventListener("click", (elem) => {
+      provinceSelector.addEventListener("click", (button) => {
+        button.stopPropagation();
         if (!provinceSelector.querySelector(".js-locations")) {
+          const cityLocationsMenu = citySelector.querySelector(".js-locations");
+          cityLocationsMenu?.remove();
+
           provinceSelector.insertAdjacentHTML(
             "beforeend",
             `
@@ -62,13 +86,15 @@ export const selectCity = async () => {
               e.stopPropagation();
               provinceSelector.textContent = name.textContent;
               provinceSelector.dataset.id = name.dataset.id;
+              fitTextInContainer(provinceSelector);
               locations.remove();
             });
           }
         }
       });
 
-      citySelector.addEventListener("click", () => {
+      citySelector.addEventListener("click", (button) => {
+        button.stopPropagation();
         if (!citySelector.querySelector(".js-locations")) {
           const provinceId = provinceSelector.dataset.id;
           if (!provinceId) {
@@ -86,6 +112,10 @@ export const selectCity = async () => {
             return;
           }
 
+          const provinceLocationsMenu =
+            provinceSelector.querySelector(".js-locations");
+          provinceLocationsMenu?.remove();
+
           citySelector.insertAdjacentHTML(
             "beforeend",
             `
@@ -94,7 +124,6 @@ export const selectCity = async () => {
           );
 
           const locations = citySelector.querySelector(".js-locations");
-          console.log(provinceId);
           const cities = iranCities
             .filter((elem) => elem.province_id == provinceId)
             .map(
@@ -111,6 +140,7 @@ export const selectCity = async () => {
               e.stopPropagation();
               citySelector.textContent = name.textContent;
               citySelector.dataset.id = name.dataset.id;
+              
               locations.remove();
             });
           }
