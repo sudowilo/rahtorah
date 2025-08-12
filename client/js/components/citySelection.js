@@ -94,11 +94,13 @@ export const selectCity = async () => {
           );
 
           const locations = citySelector.querySelector(".js-locations");
-
-          const cities = iranCities.map(
-            (elem) =>
-              `<div class="name js-city-name" data-id="${elem.id}">${elem.name}</div>`
-          );
+          console.log(provinceId);
+          const cities = iranCities
+            .filter((elem) => elem.province_id == provinceId)
+            .map(
+              (elem) =>
+                `<div class="name js-city-name" data-id="${elem.id}">${elem.name}</div>`
+            );
           const cityHTML = cities.join("");
 
           locations.insertAdjacentHTML("beforeend", cityHTML);
