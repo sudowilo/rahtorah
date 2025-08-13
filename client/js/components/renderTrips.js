@@ -82,6 +82,17 @@ export const renderTrips = async () => {
       </div>
     `);
     }
+    if (tripsHtmlElements.length === 0) {
+      tripsHtmlElements.push(`
+        <div class="no-trips-message">
+          <div class="error-message">هیچ سفری فعالی موجود نیست</div>
+          <div class="create-trip-section">
+            <div class="recommendation-message">شاید خودت یه آگهی بسازی تا بقیه بهت ملحق شن؟</div>
+            <div class="create-trip-button">ساخت سفر جدید</div>
+          </div>
+        </div>
+      `);
+    }
     trips.innerHTML = tripsHtmlElements.join("");
   } else {
   }

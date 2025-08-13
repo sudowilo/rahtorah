@@ -286,6 +286,39 @@ main .divider {
   gap: 0.3rem;
 }
 
+.trips .no-trips-message {
+  font-size: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  height: 30vh;
+}
+
+.trips .no-trips-message .error-message {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.trips .no-trips-message .create-trip-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.trips .no-trips-message .recommendation-message {
+  font-size: 0.8rem;
+}
+
+.trips .no-trips-message .create-trip-button {
+  background-color: #f96b6a;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  margin-top: 1rem;
+  cursor: pointer;
+}
+
 body .create-trip {
   padding: 0;
   margin: 0;
@@ -299,6 +332,7 @@ body .create-trip {
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 
 body .create-trip img {
