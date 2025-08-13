@@ -313,6 +313,7 @@ main .divider {
 
 .trips .no-trips-message .create-trip-button {
   background-color: #f96b6a;
+  color: #ffffff;
   padding: 1rem;
   border-radius: 0.5rem;
   margin-top: 1rem;
