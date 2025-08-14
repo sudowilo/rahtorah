@@ -33,7 +33,7 @@ header {
 }
 
 .blurred {
-  filter: blur(2px); 
+  filter: blur(2px);
 }
 
 .user-card {
@@ -81,7 +81,8 @@ header {
 /* when there is no notification */
 .user-card .down-side .requests,
 .no-content,
-.authorization-section .login-button {
+.authorization-section .login-button,
+.authorization-panel .login-button {
   border: 2.5px solid #7a7a7a;
   border-radius: 20px;
   padding: 0.1em 0.3em;
@@ -99,7 +100,8 @@ header {
 /* when there is a notification */
 .user-card .down-side .open-trips,
 .has-content,
-.authorization-section .register-button {
+.authorization-section .register-button,
+.authorization-panel .register-button {
   border: 2.5px solid #f96b6a;
   border-radius: 20px;
   padding: 0.1em 0.3em;
@@ -394,7 +396,7 @@ body .city-selection-window {
   align-items: center;
   color: #7a7a7a;
   cursor: pointer;
-  position:relative;
+  position: relative;
   white-space: nowrap;
 }
 
@@ -412,9 +414,8 @@ body .city-selection-window {
   position: relative;
 }
 
-
 .city-selection-window .top-section .select-button .locations {
-  position:absolute;
+  position: absolute;
   top: -2px;
   width: inherit;
   height: 30vh;
@@ -442,14 +443,30 @@ body .city-selection-window {
 }
 
 .city-selection-window .top-section .select-button .city-select-fail {
-  position:absolute;
+  position: absolute;
   color: #f96b6a;
   font-size: 0.8rem;
 }
 
 .city-selection-window .submit-fail {
-  position:absolute;
+  position: absolute;
   color: #f96b6a;
   font-size: 0.7rem;
   text-align: center;
+}
+
+.authorization-panel {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  width: 70vw;
+  height: 30vh;
+  position: fixed;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #ffffff;
+  border: 2px solid #54afff;
+  border-radius: 20px;
 }

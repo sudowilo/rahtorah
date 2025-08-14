@@ -8,13 +8,17 @@
     <title>rahtorah</title>
   </head>
   <body>
-    <div class="inner-body js-inner-body"> <!--blurred-->
+    <div class="inner-body js-inner-body">
+      <!--blurred-->
       <header>
         <div class="user-card"></div>
       </header>
       <main class="prevent-select">
         <div class="search">
-          <div class="origin-section js-location-selector" data-location-type="origin">
+          <div
+            class="origin-section js-location-selector"
+            data-location-type="origin"
+          >
             <div class="default-origin">مبدا</div>
           </div>
           <div class="mid-section">
@@ -26,17 +30,23 @@
               <img src="public/switch-icon.svg" alt="switch car-icon" />
             </div>
           </div>
-          <div class="destination-section js-location-selector" data-location-type="destination">
+          <div
+            class="destination-section js-location-selector"
+            data-location-type="destination"
+          >
             <div class="default-destination">مقصد</div>
           </div>
         </div>
         <div class="divider"></div>
-        <div class="trips">
-        </div>
+        <div class="trips"></div>
       </main>
       <div class="create-trip">
         <img src="public/plus-icon.svg" alt="create trip icon" />
       </div>
+    </div>
+    <div class="authorization-panel prevent-select">
+      <div class="login-button">ورود</div>
+      <div class="register-button">ثبت‌نام</div>
     </div>
   </body>
   <script type="module" src="js/index.js"></script>
