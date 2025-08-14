@@ -44,9 +44,29 @@
         <img src="public/plus-icon.svg" alt="create trip icon" />
       </div>
     </div>
-    <div class="authorization-panel prevent-select">
+    <!-- <div class="authorization-panel prevent-select">
       <div class="login-button">ورود</div>
       <div class="register-button">ثبت‌نام</div>
+    </div> -->
+    <div class="login-panel">
+      <div class="info-section">
+        <div class="username-section">
+          <div class="username-wrapper">
+            <label for="username">نام کاربری</label>
+            <small class="hint">آیدی، شماره همراه یا ایمیل</small>
+          </div>
+          <input
+            type="text"
+            name="username"
+            id="username"
+          />
+        </div>
+        <div class="password-section">
+          <label for="password">رمز عبور</label>
+          <input type="password" name="password" id="password" />
+        </div>
+      </div>
+      <div class="login-button">ورود</div>
     </div>
   </body>
   <script type="module" src="js/index.js"></script>
