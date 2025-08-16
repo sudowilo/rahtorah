@@ -102,7 +102,8 @@ header {
 .has-content,
 .authorization-section .register-button,
 .authorization-panel .register-button,
-.login-panel .login-button {
+.login-panel .login-button,
+.login-panel .register-button {
   border: 2.5px solid #f96b6a;
   border-radius: 20px;
   padding: 0.1em 0.3em;
@@ -472,14 +473,15 @@ body .city-selection-window {
   border-radius: 20px;
 }
 
-body .login-panel {
+body .login-panel,
+body .register-panel {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
 
-  width: 70vw;
-  height: 40vh;
+  width: 75vw;
+  height: 60vh;
   position: fixed;
   top: 45%;
   left: 50%;
@@ -510,8 +512,7 @@ body .login-panel .info-section .password-section {
   justify-content: space-between;
 }
 
-#username,
-#password {
+input {
   border: 2px solid #5bbbff;
   border-radius: 10px;
   padding: 3px;
@@ -520,10 +521,21 @@ body .login-panel .info-section .password-section {
   height: 20px;
 }
 
-
-
-#username:focus,
-#password:focus {
+input:focus {
   outline: none;
   border: 2px solid #f96b6a;
+}
+
+.register-panel .register-info-section {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.8rem;
+}
+
+.register-panel .register-info-section .label-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 2px;
 }
