@@ -373,10 +373,11 @@ body .city-selection-window {
   justify-content: center;
 }
 
-.city-selection-window .top-section .close-button {
+.city-selection-window .top-section .close-button,
+.close-button {
   position: absolute;
-  top: -3em;
-  right: -1.5rem;
+  top: -1rem;
+  right: -1rem;
   width: 2rem;
   height: 2rem;
   border: 1px solid #f96b6a;

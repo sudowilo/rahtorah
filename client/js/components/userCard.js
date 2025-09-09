@@ -1,12 +1,13 @@
 import { BASE_URL } from "../config.js";
-import { getToken } from "../utils/token.js"; 
+import { getToken } from "../services/auth.js"; 
+import { loginForm } from "./loginForm.js";
 
 async function getUserInfo() {
   const url = `${BASE_URL}/api/profile/info`;
-  const token = getToken();
+  // const token = getToken();
   const response = await fetch(url, {
     headers: {
-      Authorization: token,
+      // Authorization: token,
     },
   });
 
@@ -38,10 +39,15 @@ export async function renderUserCard(element) {
     if (response.status === 401) {
       element.innerHTML = `
         <div class="authorization-section prevent-select">
-          <div class="login-button">ورود</div>
-          <div class="register-button">ثبت‌نام</div>
+          <div class="login-button js-login-button">ورود</div>
+          <div class="register-button js-register-button">ثبت‌نام</div>
         </div>
     `;
+
+    const loginButton = element.querySelector(".js-login-button");
+    loginButton.addEventListener('click', (elem)=>{
+      loginForm();
+    })
     } 
   }
 }

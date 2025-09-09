@@ -1,7 +1,7 @@
 import { selectCity } from "./components/citySelection.js";
 import { renderUserCard } from "./components/userCard.js";
 import { renderTrips } from "./components/renderTrips.js";
-import { setToken } from "./utils/token.js";
+import { setToken } from "./services/auth.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
   setToken(

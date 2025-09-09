@@ -59,8 +59,8 @@ export const selectCity = async () => {
         "beforeend",
         `
       <div class="city-selection-window prevent-select">
+        <div class="close-button js-close-button">✕</div>
         <div class="top-section">
-          <div class="close-button js-close-button">✕</div>
           <div class="select-button js-province-selector">استان</div>
           <div class="select-button js-city-selector">شهر</div>
         </div>
