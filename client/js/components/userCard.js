@@ -1,6 +1,7 @@
 import { BASE_URL } from "../config.js";
 import { getToken } from "../services/auth.js"; 
 import { loginForm } from "./loginForm.js";
+import { registerForm } from "./registerForm.js";
 
 async function getUserInfo() {
   const url = `${BASE_URL}/api/profile/info`;
@@ -47,6 +48,11 @@ export async function renderUserCard(element) {
     const loginButton = element.querySelector(".js-login-button");
     loginButton.addEventListener('click', (elem)=>{
       loginForm();
+    })
+
+    const registerButton = element.querySelector(".js-register-button");
+    registerButton.addEventListener('click', (elem)=>{
+      registerForm();
     })
     } 
   }
