@@ -1,4 +1,5 @@
 import { BASE_URL } from "../config.js";
+import { createTripForm } from "./createTripForm.js";
 
 function toPersianDigits(str) {
   return str.replace(/\d/g, (d) => "۰۱۲۳۴۵۶۷۸۹"[d]);
@@ -94,6 +95,14 @@ export const renderTrips = async () => {
       `);
     }
     trips.innerHTML = tripsHtmlElements.join("");
+
+    const createTripButton = trips.querySelector(".create-trip-button"); 
+    if (createTripButton) { //in case when there is no create trip button!
+      createTripButton.addEventListener("click", () => {
+        createTripForm();
+      });
+    }
+
   } else {
   }
 };

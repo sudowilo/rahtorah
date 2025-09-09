@@ -1,5 +1,5 @@
 import { BASE_URL } from "../config.js";
-import { getToken } from "../services/auth.js"; 
+import { getToken } from "../services/auth.js";
 import { loginForm } from "./loginForm.js";
 import { registerForm } from "./registerForm.js";
 
