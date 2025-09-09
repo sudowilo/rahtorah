@@ -1,3 +1,6 @@
+import { loginForm } from "./loginForm.js";
+import { registerForm } from "./registerForm.js";
+
 export const authPanel = () => {
   const body = document.querySelector("body");
   const innerBody = body.querySelector(".inner-body");
@@ -21,4 +24,16 @@ export const authPanel = () => {
     innerBody.classList.remove("blurred");
     panel.remove();
   });
+
+  const loginButton = panel.querySelector('.login-button');
+  loginButton.addEventListener('click', ()=> {
+    panel.remove();
+    loginForm();
+  })
+
+  const registerButton = panel.querySelector('.register-button');
+  registerButton.addEventListener('click', ()=> {
+    panel.remove();
+    registerForm();
+  })
 };
