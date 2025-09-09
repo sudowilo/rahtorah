@@ -1,11 +1,12 @@
 import { BASE_URL } from "../config.js";
+import { getToken } from "../utils/token.js"; 
 
 async function getUserInfo() {
   const url = `${BASE_URL}/api/profile/info`;
-
+  const token = getToken();
   const response = await fetch(url, {
     headers: {
-      Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjE4MDI5NmRiLTJjOGUtNDExMy05MjBhLWNkNTEwY2E0YTVhMSIsInVzZXJuYW1lIjoic3Vkb3dpbG8iLCJpYXQiOjE3NTQ2NjMzODV9.Iwug3AKCU_Iiw7tlOsEASFOgIAZ76AYXkTtF4vtjKtc`,
+      Authorization: token,
     },
   });
 
