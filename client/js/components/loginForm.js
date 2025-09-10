@@ -42,11 +42,26 @@ export const loginForm = () => {
 
   const loginButton = panel.querySelector(".login-button");
   loginButton.addEventListener("click", async () => {
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
 
-    const result = await login(username, password);
+    const { success, message, token } = await login(username, password);
 
-    console.log(result);
+    if (!success) {
+      const loginButton = panel.querySelector(".login-button");
+      let errorMessage = loginButton.querySelector(".error-message");
+      if (!errorMessage) {
+        loginButton.insertAdjacentHTML(
+          "beforeend",
+          `
+              <div class="error-message">${message}</div>
+          `
+        );
+
+        errorMessage = loginButton.querySelector(".error-message");
+        setTimeout(() => errorMessage.remove(), "5000");
+      }
+    } else {
+    }
   });
 };
