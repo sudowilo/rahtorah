@@ -1,3 +1,5 @@
+import { login } from "../services/auth.js";
+
 export const loginForm = () => {
   const body = document.querySelector("body");
   const innerBody = body.querySelector(".inner-body");
@@ -31,10 +33,20 @@ export const loginForm = () => {
   );
 
   const panel = document.querySelector(".login-panel");
-  
+
   const closeButton = panel.querySelector(".js-close-button");
   closeButton.addEventListener("click", () => {
     innerBody.classList.remove("blurred");
     panel.remove();
+  });
+
+  const loginButton = panel.querySelector(".login-button");
+  loginButton.addEventListener("click", async () => {
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+
+    const result = await login(username, password);
+
+    console.log(result);
   });
 };

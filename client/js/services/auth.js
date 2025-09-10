@@ -1,7 +1,25 @@
+import { BASE_URL } from "../config.js";
+
 export const setToken = (token) => {
-  localStorage.setItem('jwt', token);
-}
+  localStorage.setItem("jwt", token);
+};
 
 export const getToken = () => {
-  return localStorage.getItem('jwt');
-}
+  return localStorage.getItem("jwt");
+};
+
+export const login = async (identifier, password) => {
+  const url = `${BASE_URL}/api/auth/login`;
+  const myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+
+  const response = await fetch(url, {
+    method: "POST",
+    body: JSON.stringify({ identifier, password }),
+    headers: myHeaders,
+  });
+
+  const result = await response.json();
+  
+  return result;
+};

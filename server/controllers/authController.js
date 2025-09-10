@@ -127,7 +127,7 @@ export const login = async (req, res) => {
   }
 
   if (!data) {
-    return res.status(400).json({
+    return res.status(401).json({
       success: false,
       message: "حسابی با اطلاعات ورودی وجود ندارد",
     });
@@ -137,7 +137,7 @@ export const login = async (req, res) => {
   const passwordVerify = await bcrypt.compare(password, hash);
 
   if (!passwordVerify) {
-    return res.status(400).json({
+    return res.status(401).json({
       success: false,
       message: "رمز عبور اشتباه است",
     });
