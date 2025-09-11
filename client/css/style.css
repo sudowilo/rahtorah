@@ -514,7 +514,8 @@ body .login-panel .info-section .password-section {
   justify-content: space-between;
 }
 
-.login-panel .login-button {
+.login-panel .login-button,
+.register-panel .register-button {
   position: relative;
 }
 
@@ -524,6 +525,16 @@ body .login-panel .info-section .password-section {
   color: red;
   position: absolute;
   top: -5rem;
+
+  white-space: nowrap;
+}
+
+.register-panel .error-message {
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: red;
+  position: absolute;
+  top: -2rem;
 
   white-space: nowrap;
 }
@@ -571,13 +582,10 @@ input:focus {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #ffffff;
+  color: #000000;
+  background-color: antiquewhite;
 }
 
-.register-panel .gender-buttons .female {
-  background-color: #ff71af;
-}
-
-.register-panel .gender-buttons .male {
-  background-color: #5bbbff;
+.register-panel .gender-buttons .selected {
+  background-color: #f96b6a;
 }

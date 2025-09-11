@@ -1,3 +1,21 @@
+function displayError(registerButton, message, errorMessage) {
+  if (errorMessage) {
+    errorMessage.remove();
+  }
+  registerButton.insertAdjacentHTML(
+    "beforeend",
+    `
+      <div class="error-message">${message}</div>
+    `
+  );
+
+  errorMessage = registerButton.querySelector(".error-message");
+  errorMessage.addEventListener("click", (e) => {
+    e.stopPropagation();
+  });
+  setTimeout(() => errorMessage.remove(), "5000");
+}
+
 export const registerForm = () => {
   const body = document.querySelector("body");
   const innerBody = body.querySelector(".inner-body");
@@ -25,11 +43,11 @@ export const registerForm = () => {
           </div>
         </div>
         <div class="info-child">
-          <label for="user-name">نام کاربری</label>
+          <label for="username">نام کاربری</label>
           <input
             type="text"
-            name="user-name"
-            id="user-name"
+            name="username"
+            id="username"
             placeholder="یه نام کاربری خاص برای خودت انتخاب کن"
           />
         </div>
@@ -56,10 +74,56 @@ export const registerForm = () => {
   );
 
   const panel = document.querySelector(".register-panel");
-  
+
   const closeButton = panel.querySelector(".js-close-button");
   closeButton.addEventListener("click", () => {
     innerBody.classList.remove("blurred");
     panel.remove();
+  });
+
+  let gender = "";
+  const female = panel.querySelector(".female");
+  const male = panel.querySelector(".male");
+
+  female.addEventListener("click", () => {
+    male.classList.remove("selected");
+    female.classList.add("selected");
+    gender = "female";
+  });
+  male.addEventListener("click", () => {
+    female.classList.remove("selected");
+    male.classList.add("selected");
+    gender = "male";
+  });
+
+  const registerButton = panel.querySelector(".register-button");
+  registerButton.addEventListener("click", () => {
+    const firstName = document.getElementById("first-name").value;
+    const lastName = document.getElementById("last-name").value;
+    const username = document.getElementById("username").value;
+    const phoneNumber = document.getElementById("phone-number").value;
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+    const repeatPassword = document.getElementById("repeat-password").value;
+
+    const errorMessage = registerButton.querySelector(".error-message");
+    if (password !== repeatPassword) {
+      displayError(
+        registerButton,
+        "رمز عبور و تکرار رمز عبور باید یکسان باشند.",
+        errorMessage
+      );
+      return;
+    }
+
+    console.log(
+      firstName,
+      lastName,
+      username,
+      gender,
+      password,
+      phoneNumber,
+      email
+    );
   });
 };

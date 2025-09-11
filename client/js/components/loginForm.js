@@ -50,20 +50,21 @@ export const loginForm = () => {
     if (!success) {
       const loginButton = panel.querySelector(".login-button");
       let errorMessage = loginButton.querySelector(".error-message");
-      if (!errorMessage) {
-        loginButton.insertAdjacentHTML(
-          "beforeend",
-          `
+      if (errorMessage) {
+        errorMessage.remove();
+      }
+      loginButton.insertAdjacentHTML(
+        "beforeend",
+        `
               <div class="error-message">${message}</div>
           `
-        );
+      );
 
-        errorMessage = loginButton.querySelector(".error-message");
-        errorMessage.addEventListener("click", (e) => {
-          e.stopPropagation();
-        });
-        setTimeout(() => errorMessage.remove(), "5000");
-      }
+      errorMessage = loginButton.querySelector(".error-message");
+      errorMessage.addEventListener("click", (e) => {
+        e.stopPropagation();
+      });
+      setTimeout(() => errorMessage.remove(), "5000");
     } else {
       setToken(token);
       panel.remove();
