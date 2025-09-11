@@ -45,6 +45,7 @@ const renderDefaultLocationButtons = () => {
 };
 
 export const selectCity = async () => {
+  swapCities();
   renderDefaultLocationButtons();
   const locationButtons = document.querySelectorAll(".js-location-selector");
   const body = document.querySelector("body");
@@ -225,4 +226,18 @@ export const selectCity = async () => {
       });
     });
   }
+};
+
+const swapCities = () => {
+  const swapButton = document.querySelector(".swap-button");
+  swapButton.addEventListener("click", async () => {
+    const destination = localStorage.getItem("origin");
+    const origin = localStorage.getItem("destination");
+
+    localStorage.setItem("origin", origin);
+    localStorage.setItem("destination", destination);
+
+    renderDefaultLocationButtons();
+    await renderTrips(origin, destination);
+  });
 };

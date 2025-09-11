@@ -189,12 +189,12 @@ main {
   border-top: 5px dotted rgba(0, 0, 0, 0.3);
 }
 
-.search .mid-section .switch-button {
+.search .mid-section .swap-button {
   margin-top: 0.8rem;
   cursor: pointer;
 }
 
-.search .mid-section .switch-button img {
+.search .mid-section .swap-button img {
   width: 2.5em;
 }
 
