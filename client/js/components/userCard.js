@@ -5,10 +5,10 @@ import { registerForm } from "./registerForm.js";
 
 async function getUserInfo() {
   const url = `${BASE_URL}/api/profile/info`;
-  // const token = getToken();
+  const token = getToken();
   const response = await fetch(url, {
     headers: {
-      // Authorization: token,
+      Authorization: token,
     },
   });
 

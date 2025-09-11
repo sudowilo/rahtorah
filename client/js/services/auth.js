@@ -1,7 +1,7 @@
 import { BASE_URL } from "../config.js";
 
 export const setToken = (token) => {
-  localStorage.setItem("jwt", token);
+  localStorage.setItem("jwt", `Bearer ${token}`);
 };
 
 export const getToken = () => {

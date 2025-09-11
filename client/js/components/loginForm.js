@@ -1,4 +1,4 @@
-import { login } from "../services/auth.js";
+import { login, setToken } from "../services/auth.js";
 
 export const loginForm = () => {
   const body = document.querySelector("body");
@@ -59,9 +59,16 @@ export const loginForm = () => {
         );
 
         errorMessage = loginButton.querySelector(".error-message");
+        errorMessage.addEventListener("click", (e) => {
+          e.stopPropagation();
+        });
         setTimeout(() => errorMessage.remove(), "5000");
       }
     } else {
+      setToken(token);
+      panel.remove();
+      innerBody.classList.remove("blurred");
+      location.reload();
     }
   });
 };
