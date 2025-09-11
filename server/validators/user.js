@@ -17,21 +17,21 @@ export const userSchema = z.object({
       persianRegex,
       "نام خانوادگی باید فارسی باشد و حداقل ۳ حرف داشته باشد"
     ),
-  gender: z.enum(["male", "female"]),
+  gender: z.enum(["male", "female"], "جنسیت خود را انتخاب کنید"),
   username: z
     .string()
     .regex(
       usernameRegex,
       "نام کاربری باید با حرف شروع شود و حداقل ۳ کاراکتر انگلیسی باشد"
     ),
+  phoneNumber: z
+    .string()
+    .regex(phoneRegex, "شماره باید با 09 شروع شده و ۱۱ رقم باشد"),
   password: z
     .string()
     .regex(
       passwordRegex,
       "رمز عبور باید حداقل ۸ کاراکتر باشد و فاصله نداشته باشد"
     ),
-  phoneNumber: z
-    .string()
-    .regex(phoneRegex, "شماره باید با 09 شروع شده و ۱۱ رقم باشد"),
-  email: z.string().email("ایمیل نامعتبر است"),
+  email: z.string().email("ایمیل نامعتبر است").optional().or(z.literal("")),
 });

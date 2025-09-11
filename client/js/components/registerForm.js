@@ -1,3 +1,5 @@
+import { register, setToken } from "../services/auth.js";
+
 function displayError(registerButton, message, errorMessage) {
   if (errorMessage) {
     errorMessage.remove();
@@ -97,7 +99,7 @@ export const registerForm = () => {
   });
 
   const registerButton = panel.querySelector(".register-button");
-  registerButton.addEventListener("click", () => {
+  registerButton.addEventListener("click", async () => {
     const firstName = document.getElementById("first-name").value;
     const lastName = document.getElementById("last-name").value;
     const username = document.getElementById("username").value;
@@ -116,14 +118,34 @@ export const registerForm = () => {
       return;
     }
 
-    console.log(
+    const { success, message, errors , token} = await register(
       firstName,
       lastName,
-      username,
       gender,
+      username,
       password,
       phoneNumber,
       email
     );
+
+    if (!success) {
+      if (errors) {
+        delete errors._errors;
+
+        for (const error in errors) {
+          const inputErrors = errors[error]._errors;
+          const index = inputErrors.length - 1;
+          displayError(registerButton, inputErrors[index], errorMessage);
+          break;
+        }
+      } else {
+        displayError(registerButton, message, errorMessage);
+      }
+    } else {
+      setToken(token);
+      panel.remove();
+      innerBody.classList.remove("blurred");
+      location.reload();
+    }
   });
 };

@@ -20,6 +20,38 @@ export const login = async (identifier, password) => {
   });
 
   const result = await response.json();
-  
+
   return result;
+};
+
+export const register = async (
+  firstName,
+  lastName,
+  gender,
+  username,
+  password,
+  phoneNumber,
+  email
+) => {
+  const url = `${BASE_URL}/api/auth/register`;
+  const myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+
+  const requestBody = {
+    firstName,
+    lastName,
+    gender,
+    username,
+    password,
+    phoneNumber,
+    email,
+  };
+
+  const response = await fetch(url, {
+    method: "Post",
+    headers: myHeaders,
+    body: JSON.stringify(requestBody),
+  });
+
+  return await response.json();
 };

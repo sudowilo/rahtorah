@@ -29,7 +29,7 @@ export const register = async (req, res) => {
     if (!result.success) {
       return res.status(400).json({
         success: false,
-        message: "مشکل در اعتبارسنجی ورودی",
+        message: "ورودی ها را طبق فرمت صحیح وارد نمایید",
         errors: result.error.format(),
       });
     }
