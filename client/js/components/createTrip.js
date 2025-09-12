@@ -4,7 +4,7 @@ export const createTripForm = () => {
   authPanel();
 };
 
-export const createTripEvent = () => {
+export const createTripButton = () => {
   const createTripButton = document.querySelector('.create-trip');
 
   createTripButton.addEventListener('click', (elem)=>{

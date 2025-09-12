@@ -55,3 +55,15 @@ export const register = async (
 
   return await response.json();
 };
+
+export const isAuthorized = async () => {
+  const url = `${BASE_URL}/api/auth/is-authorized`;
+  const token = getToken();
+  const response = await fetch(url, {
+    headers: {
+      Authorization: token,
+    },
+  });
+
+  return await response.json();
+}

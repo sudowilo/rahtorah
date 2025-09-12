@@ -1,5 +1,5 @@
 import { BASE_URL } from "../config.js";
-import { createTripForm } from "./createTripForm.js";
+import { createTripForm } from "./createTrip.js";
 
 function toPersianDigits(str) {
   return str.replace(/\d/g, (d) => "۰۱۲۳۴۵۶۷۸۹"[d]);
