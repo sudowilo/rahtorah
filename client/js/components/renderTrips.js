@@ -1,5 +1,5 @@
 import { BASE_URL } from "../config.js";
-import { createTripForm } from "./createTrip.js";
+import { renderTripForm } from "./createTrip.js";
 
 function toPersianDigits(str) {
   return str.replace(/\d/g, (d) => "۰۱۲۳۴۵۶۷۸۹"[d]);
@@ -99,7 +99,7 @@ export const renderTrips = async () => {
     const createTripButton = trips.querySelector(".create-trip-button"); 
     if (createTripButton) { //in case when there is no create trip button!
       createTripButton.addEventListener("click", () => {
-        createTripForm();
+        renderTripForm();
       });
     }
 
