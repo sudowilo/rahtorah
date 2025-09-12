@@ -65,5 +65,6 @@ export const isAuthorized = async () => {
     },
   });
 
-  return await response.json();
+  const result = await response.json();
+  return result.success;
 }

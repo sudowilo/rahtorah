@@ -1,7 +1,13 @@
 import { authPanel } from "./authPanel.js";
+import { isAuthorized } from "../services/auth.js";
 
-export const createTripForm = () => {
-  authPanel();
+export const createTripForm = async () => {
+  const authorized = await isAuthorized();
+  if (!authorized) {
+    authPanel();
+  } else {
+    console.log('well hello');
+  }
 };
 
 export const createTripButton = () => {
