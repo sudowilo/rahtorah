@@ -161,3 +161,10 @@ export const login = async (req, res) => {
     token,
   });
 };
+
+export const isAuthorized = async (req, res) => {
+  res.status(200).json({
+    success: true,
+    message: "کاربر احراز هویت شده است.",
+  });
+}
