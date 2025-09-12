@@ -92,13 +92,13 @@ export const selectCity = async () => {
         button.stopPropagation();
         if (!provinceSelector.querySelector(".js-locations")) {
           const cityLocationsMenu = citySelector.querySelector(".js-locations");
-          cityLocationsMenu?.remove();
+          cityLocationsMenu?.remove(); //close city menu when clicked on province selector
 
           provinceSelector.insertAdjacentHTML(
             "beforeend",
             `
-          <div class="locations js-locations"></div>
-          `
+              <div class="locations js-locations"></div>
+            `
           );
 
           const locations = provinceSelector.querySelector(".js-locations");
@@ -134,10 +134,11 @@ export const selectCity = async () => {
               citySelector.insertAdjacentHTML(
                 "beforeend",
                 `
-              <div class="city-select-fail">استان را انتخاب کنید</div>
-              `
+                  <div class="city-select-fail">استان را انتخاب کنید</div>
+                `
               );
 
+              //dynamically put error message below the button
               errorMessage = citySelector.querySelector(".city-select-fail");
               errorMessage.style.top = citySelector.scrollHeight + "px";
               setTimeout(() => errorMessage.remove(), "5000");
@@ -147,13 +148,13 @@ export const selectCity = async () => {
 
           const provinceLocationsMenu =
             provinceSelector.querySelector(".js-locations");
-          provinceLocationsMenu?.remove();
+          provinceLocationsMenu?.remove(); //close province menu when clicked on city selector
 
           citySelector.insertAdjacentHTML(
             "beforeend",
             `
-          <div class="locations js-locations"></div>
-          `
+              <div class="locations js-locations"></div>
+            `
           );
 
           const locations = citySelector.querySelector(".js-locations");
