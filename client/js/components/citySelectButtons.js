@@ -14,16 +14,20 @@ const fitTextInContainer = (container) => {
   }
 };
 
-const citySelectButtons = (buttonsSection) => {
+export const citySelectButtons = (parentContainer) => {
   const html = `
-    <div class="select-button js-province-selector">استان</div>
-    <div class="select-button js-city-selector">شهر</div>
+    <div class="buttons-container">
+      <div class="select-button js-province-selector">استان</div>
+      <div class="select-button js-city-selector">شهر</div>
+    </div>
   `;
+  
+  parentContainer.insertAdjacentHTML("beforeend", html);
 
-  buttonsSection.insertAdjacentHTML("beforeend", html);
-
-  const provinceSelector = buttonsSection.querySelector(".js-province-selector");
-  const citySelector = buttonsSection.querySelector(".js-city-selector");
+  const provinceSelector = parentContainer.querySelector(
+    ".js-province-selector"
+  );
+  const citySelector = parentContainer.querySelector(".js-city-selector");
 
   provinceSelector.addEventListener("click", (button) => {
     button.stopPropagation();

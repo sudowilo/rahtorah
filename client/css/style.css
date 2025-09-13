@@ -341,12 +341,12 @@ body .create-trip {
   cursor: pointer;
 }
 
-body .create-trip img {
+.create-trip img {
   width: 2rem;
   color: #ffffff;
 }
 
-body .city-selection-window {
+.city-selection-window {
   width: 70vw;
   height: 30vh;
   position: fixed;
@@ -361,7 +361,8 @@ body .city-selection-window {
   justify-content: space-around;
 }
 
-.city-selection-window .top-section {
+.city-selection-window .top-section,
+.buttons-container {
   display: flex;
   justify-content: space-between;
   margin: 0em 1em;
@@ -390,7 +391,8 @@ body .city-selection-window {
   cursor: pointer;
 }
 
-.city-selection-window .top-section .select-button {
+.city-selection-window .top-section .select-button,
+.select-button {
   border: 2px solid lightblue;
   border-radius: 5px;
   width: 7rem;
@@ -418,7 +420,8 @@ body .city-selection-window {
   position: relative;
 }
 
-.city-selection-window .top-section .select-button .locations {
+.city-selection-window .top-section .select-button .locations,
+.locations {
   position: absolute;
   top: -2px;
   width: inherit;
@@ -433,7 +436,8 @@ body .city-selection-window {
   z-index: 999;
 }
 
-.city-selection-window .top-section .select-button .locations .name {
+.city-selection-window .top-section .select-button .locations .name,
+.locations .name {
   font-size: 0.8rem;
   padding: 0.5rem 0;
   display: flex;
@@ -441,12 +445,14 @@ body .city-selection-window {
   align-items: center;
 }
 
-.city-selection-window .top-section .select-button .locations .name:hover {
+.city-selection-window .top-section .select-button .locations .name:hover,
+.locations .name:hover {
   background-color: #f96b6a;
   color: #ffffff;
 }
 
-.city-selection-window .top-section .select-button .city-select-fail {
+.city-selection-window .top-section .select-button .city-select-fail,
+.city-select-fail {
   position: absolute;
   color: #f96b6a;
   font-size: 0.8rem;
@@ -475,8 +481,8 @@ body .city-selection-window {
   border-radius: 20px;
 }
 
-body .login-panel,
-body .register-panel {
+.login-panel,
+.register-panel {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -493,7 +499,7 @@ body .register-panel {
   border-radius: 20px;
 }
 
-body .login-panel .info-section {
+.login-panel .info-section {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -503,12 +509,12 @@ body .login-panel .info-section {
   font-size: 0.9rem;
 }
 
-body .login-panel .info-section .username-section .hint {
+.login-panel .info-section .username-section .hint {
   color: #737373;
 }
 
-body .login-panel .info-section .username-section,
-body .login-panel .info-section .password-section {
+.login-panel .info-section .username-section,
+.login-panel .info-section .password-section {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -588,4 +594,19 @@ input:focus {
 
 .register-panel .gender-buttons .selected {
   background-color: #f96b6a;
+}
+
+.create-trip-panel {
+  width: 80vw;
+  height: 60vh;
+  position: fixed;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #ffffff;
+  border: 2px solid #54afff;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }
