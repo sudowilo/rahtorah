@@ -404,6 +404,7 @@ body .create-trip {
   cursor: pointer;
   position: relative;
   white-space: nowrap;
+  margin: 0px 2px;
 }
 
 .city-selection-window .bottom-section .submit-button {
@@ -609,4 +610,161 @@ input:focus {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  padding: 0px 5px;
+}
+
+.create-trip-panel {
+  display: flex;
+  flex-direction: column;
+}
+
+.create-trip-panel .row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.create-trip-panel .departure-time .right-section,
+.create-trip-panel .departure-time .left-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.create-trip-panel .sm-label {
+  font-size: 0.9rem;
+}
+
+.date-container {
+  display: flex;
+  margin-left: 1rem;
+}
+
+.date-container .date-year,
+.date-container .date-month,
+.date-container .date-day {
+  border: 2px solid lightblue;
+  border-radius: 5px;
+  width: 3rem;
+  height: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #7a7a7a;
+  cursor: pointer;
+  position: relative;
+  white-space: nowrap;
+  margin-left: 0.5rem;
+}
+
+.time-container {
+  display: flex;
+}
+
+.time-container .time-hour,
+.time-container .time-minute,
+.passengers-info .seats-number {
+  border: 2px solid lightblue;
+  border-radius: 5px;
+  width: 2.5rem;
+  height: 1.75rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #7a7a7a;
+  cursor: pointer;
+  position: relative;
+  white-space: nowrap;
+  margin-left: 0.5rem;
+}
+.suggested-transport-section label {
+  font-size: 0.9rem;
+}
+#suggested-transport-service {
+  width: 7rem;
+}
+
+.passengers-info .passengers-number-section,
+.passengers-info .passengers-gender-section {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.passengers-info .gender-selection {
+  border: 2px solid lightblue;
+  border-radius: 5px;
+  width: 6rem;
+  height: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #7a7a7a;
+  cursor: pointer;
+  position: relative;
+  white-space: nowrap;
+  margin-left: 0.5rem;
+}
+
+.note-section .label-section {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.note-section .label-section .sm-label {
+  font-size: 0.75rem;
+  color: #4f4f4f;
+}
+
+.note-section .note-input-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#trip-note-input {
+  width: 90%;
+  height: 80%;
+  font-size: 1rem;
+}
+
+.create-trip-panel .actions-section {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.actions-section .submit-trip {
+  border: 2.5px solid #7a7a7a00;
+  border-radius: 20px;
+  padding: 0.1em 0.3em;
+  background-color: #ffffff;
+  color: #ffffff;
+  background-color: #059f00;
+  width: 7em;
+  height: 2.5em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.actions-section .cancel {
+ border: 2.5px solid #7a7a7a00;
+  border-radius: 20px;
+  padding: 0.1em 0.3em;
+  background-color: #ffffff;
+  color: #ffffff;
+  background-color: #af2a2a;
+  width: 7em;
+  height: 2.5em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer; 
 }
